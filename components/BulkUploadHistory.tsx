@@ -20,6 +20,8 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 
+import apiClient from "@/lib/api";
+
 interface BatchHistory {
   id: string;
   fileName: string;
@@ -51,7 +53,7 @@ const BulkUploadHistory = () => {
   const fetchBatchHistory = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3001/api/bulk-upload");
+      const response = await apiClient.get("/api/bulk-upload");
 
       if (response.ok) {
         const data = await response.json();
@@ -80,11 +82,8 @@ const BulkUploadHistory = () => {
     setShowDeleteModal(false);
 
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/bulk-upload/${batchToDelete.id}?deleteProducts=${deleteProducts}`,
-        {
-          method: "DELETE",
-        }
+      const response = await apiClient.delete(
+        `/api/bulk-upload/${batchToDelete.id}?deleteProducts=${deleteProducts}`
       );
 
       // Check if response has content before parsing JSON

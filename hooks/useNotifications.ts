@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useNotificationStore } from '@/app/_zustand/notificationStore';
 import { notificationApi } from '@/lib/notification-api';
+import apiClient from '@/lib/api';
 import { NotificationFilters } from '@/types/notification';
 import toast from 'react-hot-toast';
 
@@ -35,7 +36,7 @@ export const useNotifications = () => {
     if (!session?.user?.email) return null;
     
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/email/${session.user.email}`);
+      const response = await apiClient.get(`/api/users/email/${session.user.email}`);
       const userData = await response.json();
       return userData?.id || null;
     } catch (error) {
@@ -213,7 +214,7 @@ export const useUnreadCount = () => {
 
     try {
       // Get user ID first
-      const userResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/email/${session.user.email}`);
+      const userResponse = await apiClient.get(`/api/users/email/${session.user.email}`);
       const userData = await userResponse.json();
       
       if (userData?.id) {
