@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { ProductItem, SectionTitle } from "@/components";
 import apiClient from "@/lib/api";
 import React from "react";
