@@ -26,39 +26,39 @@ const HeaderTop = () => {
     toast.success("Logout successful!");
   }
   return (
-    <div className="h-10 text-white bg-blue-500 max-lg:px-5 max-lg:h-16 max-[573px]:px-0">
+    <div className="h-10 text-slate-300 bg-slate-950 border-b border-slate-800/80 max-lg:px-5 max-lg:h-16 max-[573px]:px-0">
       <div className="flex justify-between h-full max-lg:flex-col max-lg:justify-center max-lg:items-center max-w-screen-2xl mx-auto px-12 max-[573px]:px-0">
-        <ul className="flex items-center h-full gap-x-5 max-[370px]:text-sm max-[370px]:gap-x-2">
-          <li className="flex items-center gap-x-2 font-semibold">
-            <FaHeadphones className="text-white" />
+        <ul className="flex items-center h-full gap-x-6 text-xs md:text-sm max-[370px]:text-xs max-[370px]:gap-x-2">
+          <li className="flex items-center gap-x-2 font-medium hover:text-cyan-400 transition-colors">
+            <FaHeadphones className="text-cyan-400" />
             <span>+381 61 123 321</span>
           </li>
-          <li className="flex items-center gap-x-2 font-semibold">
-            <FaRegEnvelope className="text-white text-xl" />
+          <li className="flex items-center gap-x-2 font-medium hover:text-cyan-400 transition-colors">
+            <FaRegEnvelope className="text-cyan-400 text-lg" />
             <span>test@email.com</span>
           </li>
         </ul>
-        <ul className="flex items-center gap-x-5 h-full max-[370px]:text-sm max-[370px]:gap-x-2 font-semibold">
+        <ul className="flex items-center gap-x-6 h-full text-xs md:text-sm max-[370px]:text-xs max-[370px]:gap-x-2 font-medium">
           {!session ? ( 
           <>
           <li className="flex items-center">
-            <Link href="/login" className="flex items-center gap-x-2 font-semibold">
-              <FaRegUser className="text-white" />
+            <Link href="/login" className="flex items-center gap-x-2 hover:text-cyan-400 transition-colors">
+              <FaRegUser className="text-cyan-400" />
               <span>Login</span>
             </Link>
           </li>
           <li className="flex items-center">
-            <Link href="/register" className="flex items-center gap-x-2 font-semibold">
-              <FaRegUser className="text-white" />
+            <Link href="/register" className="flex items-center gap-x-2 hover:text-cyan-400 transition-colors">
+              <FaRegUser className="text-cyan-400" />
               <span>Register</span>
             </Link>
           </li>
           </>
           ) :  (<>
-          <span className="ml-10 text-base">{session.user?.email}</span>
+          <span className="ml-10 text-xs md:text-sm text-cyan-300 font-semibold">{session.user?.email}</span>
           <li className="flex items-center">
-            <button onClick={() => handleLogout()} className="flex items-center gap-x-2 font-semibold">
-              <FaRegUser className="text-white" />
+            <button onClick={() => handleLogout()} className="flex items-center gap-x-2 hover:text-rose-400 transition-colors">
+              <FaRegUser className="text-slate-400" />
               <span>Log out</span>
             </button>
           </li>

@@ -34,17 +34,17 @@ const ProductsSection = async () => {
   }
 
   return (
-    <div className="bg-blue-500 border-t-4 border-white">
-      <div className="max-w-screen-2xl mx-auto pt-20">
+    <div className="bg-slate-950 py-16 border-t border-slate-800/80 relative">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
         <Heading title="FEATURED PRODUCTS" />
-        <div className="grid grid-cols-4 justify-items-center max-w-screen-2xl mx-auto py-10 gap-x-2 px-10 gap-y-8 max-xl:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center py-10 gap-6">
           {products.length > 0 ? (
             products.map((product: any) => (
               <ProductItem key={product.id} product={product} color="white" />
             ))
           ) : (
-            <div className="col-span-full text-center text-white py-10">
-              <p>No products available at the moment.</p>
+            <div className="col-span-full text-center py-16 bg-slate-900/60 rounded-2xl border border-slate-800 w-full max-w-xl mx-auto">
+              <p className="text-slate-400 text-lg font-medium">No products available at the moment.</p>
             </div>
           )}
         </div>
