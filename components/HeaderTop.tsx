@@ -56,6 +56,17 @@ const HeaderTop = () => {
           </>
           ) :  (<>
           <span className="ml-10 text-xs md:text-sm text-cyan-300 font-semibold">{session.user?.email}</span>
+          {session.user?.role === "admin" && (
+            <li className="flex items-center">
+              <Link
+                href="/admin"
+                className="flex items-center gap-x-1.5 px-2.5 py-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 rounded-lg text-xs font-bold transition-all shadow-sm"
+              >
+                <FaLocationDot className="text-cyan-400 text-xs" />
+                <span>Admin Dashboard</span>
+              </Link>
+            </li>
+          )}
           <li className="flex items-center">
             <button onClick={() => handleLogout()} className="flex items-center gap-x-2 hover:text-rose-400 transition-colors">
               <FaRegUser className="text-slate-400" />

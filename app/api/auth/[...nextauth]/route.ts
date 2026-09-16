@@ -92,14 +92,29 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role;
+        token.role = (user as any).role;
         token.id = user.id;
         token.iat = Math.floor(Date.now() / 1000); // Issued at time
       }
       
+      // Fallback: If role is not yet in token, fetch from DB by email
+      if (!token.role && token.email) {
+        try {
+          const dbUser = await prisma.user.findFirst({
+            where: { email: token.email },
+          });
+          if (dbUser) {
+            token.role = dbUser.role;
+            token.id = dbUser.id;
+          }
+        } catch (err) {
+          console.error("Error fetching user role in jwt callback:", err);
+        }
+      }
+      
       // Check if token is expired (15 minutes)
       const now = Math.floor(Date.now() / 1000);
-      const tokenAge = now - (token.iat as number);
+      const tokenAge = now - ((token.iat as number) || now);
       const maxAge = 15 * 60; // 15 minutes
       
       if (tokenAge > maxAge) {
@@ -110,7 +125,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (token) {
+      if (token && session.user) {
         session.user.role = token.role as string;
         session.user.id = token.id as string;
       }
