@@ -340,422 +340,401 @@ const CheckoutPage = () => {
   }, []);
 
   return (
-    <div className="bg-white">
+    <div className="bg-slate-950 text-slate-100 min-h-screen pb-20">
       <SectionTitle title="Checkout" path="Home | Cart | Checkout" />
-      
-      <div className="hidden h-full w-1/2 bg-white lg:block" aria-hidden="true" />
-      <div className="hidden h-full w-1/2 bg-gray-50 lg:block" aria-hidden="true" />
 
-      <main className="relative mx-auto grid max-w-screen-2xl grid-cols-1 gap-x-16 lg:grid-cols-2 lg:px-8 xl:gap-x-48">
+      <main className="relative mx-auto max-w-screen-2xl px-6 md:px-12 py-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <h1 className="sr-only">Order information</h1>
 
-        {/* Order Summary */}
+        {/* Form Inputs Section (Left Column - 7 cols) */}
+        <form className="lg:col-span-7 bg-slate-900/80 border border-slate-800 rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl space-y-10">
+          {/* Contact Information */}
+          <section aria-labelledby="contact-info-heading">
+            <h2
+              id="contact-info-heading"
+              className="text-xl font-black text-white uppercase tracking-wider border-b border-slate-800 pb-4"
+            >
+              Contact Information
+            </h2>
+
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label
+                  htmlFor="name-input"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  First Name *
+                </label>
+                <input
+                  value={checkoutForm.name}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      name: e.target.value,
+                    })
+                  }
+                  type="text"
+                  id="name-input"
+                  name="name-input"
+                  autoComplete="given-name"
+                  required
+                  placeholder="John"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="lastname-input"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Last Name *
+                </label>
+                <input
+                  value={checkoutForm.lastname}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      lastname: e.target.value,
+                    })
+                  }
+                  type="text"
+                  id="lastname-input"
+                  name="lastname-input"
+                  autoComplete="family-name"
+                  required
+                  placeholder="Doe"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="phone-input"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Phone Number *
+                </label>
+                <input
+                  value={checkoutForm.phone}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      phone: e.target.value,
+                    })
+                  }
+                  type="tel"
+                  id="phone-input"
+                  name="phone-input"
+                  autoComplete="tel"
+                  required
+                  placeholder="+1 (555) 000-0000"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email-address"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Email Address *
+                </label>
+                <input
+                  value={checkoutForm.email}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      email: e.target.value,
+                    })
+                  }
+                  type="email"
+                  id="email-address"
+                  name="email-address"
+                  autoComplete="email"
+                  required
+                  placeholder="john@example.com"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* Payment Notice */}
+          <section className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 flex items-start gap-3">
+            <svg className="h-5 w-5 shrink-0 text-cyan-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+            </svg>
+            <div className="text-xs space-y-1">
+              <h3 className="font-bold uppercase tracking-wider text-cyan-200">Secure Order Processing</h3>
+              <p className="text-slate-300">Payment details will be verified upon order placement. You will receive an instant invoice confirmation.</p>
+            </div>
+          </section>
+
+          {/* Shipping Address */}
+          <section aria-labelledby="shipping-heading">
+            <h2
+              id="shipping-heading"
+              className="text-xl font-black text-white uppercase tracking-wider border-b border-slate-800 pb-4"
+            >
+              Shipping Address
+            </h2>
+
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="company"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Company *
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  required
+                  placeholder="Acme Corp"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                  value={checkoutForm.company}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      company: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="address"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Street Address *
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  autoComplete="street-address"
+                  required
+                  placeholder="123 Tech Boulevard"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                  value={checkoutForm.adress}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      adress: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="apartment"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Apartment, Suite, Unit *
+                </label>
+                <input
+                  type="text"
+                  id="apartment"
+                  name="apartment"
+                  required
+                  placeholder="Apt 4B"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                  value={checkoutForm.apartment}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      apartment: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="city"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  City *
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  autoComplete="address-level2"
+                  required
+                  placeholder="San Francisco"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                  value={checkoutForm.city}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      city: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="region"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Country *
+                </label>
+                <input
+                  type="text"
+                  id="region"
+                  name="region"
+                  autoComplete="address-level1"
+                  required
+                  placeholder="United States"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                  value={checkoutForm.country}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      country: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="postal-code"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Postal Code *
+                </label>
+                <input
+                  type="text"
+                  id="postal-code"
+                  name="postal-code"
+                  autoComplete="postal-code"
+                  required
+                  placeholder="94103"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                  value={checkoutForm.postalCode}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      postalCode: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="order-notice"
+                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                >
+                  Order Notes / Special Delivery Instructions
+                </label>
+                <textarea
+                  id="order-notice"
+                  name="order-notice"
+                  rows={3}
+                  placeholder="Gate code, delivery preferences..."
+                  disabled={isSubmitting}
+                  className="block w-full rounded-xl bg-slate-800/80 border border-slate-700/80 px-4 py-3 text-white placeholder-slate-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all"
+                  value={checkoutForm.orderNotice}
+                  onChange={(e) =>
+                    setCheckoutForm({
+                      ...checkoutForm,
+                      orderNotice: e.target.value,
+                    })
+                  }
+                ></textarea>
+              </div>
+            </div>
+          </section>
+
+          <div className="pt-4">
+            <button
+              type="button"
+              onClick={makePurchase}
+              disabled={isSubmitting}
+              className="w-full rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 hover:from-blue-500 hover:to-cyan-400 text-white font-extrabold py-4 px-8 uppercase tracking-wider text-sm shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "Processing Order..." : "Place Order Now"}
+            </button>
+          </div>
+        </form>
+
+        {/* Order Summary Sidebar (Right Column - 5 cols) */}
         <section
           aria-labelledby="summary-heading"
-          className="bg-gray-50 px-4 pb-10 pt-16 sm:px-6 lg:col-start-2 lg:row-start-1 lg:bg-transparent lg:px-0 lg:pb-16"
+          className="lg:col-span-5 bg-slate-900/80 border border-slate-800 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-2xl text-slate-200 sticky top-28"
         >
           <div className="mx-auto max-w-lg lg:max-w-none">
-            <h2 id="summary-heading" className="text-lg font-medium text-gray-900">
-              Order summary
+            <h2 id="summary-heading" className="text-xl font-black text-white uppercase tracking-wider border-b border-slate-800 pb-4">
+              Items in Your Order
             </h2>
 
             <ul
               role="list"
-              className="divide-y divide-gray-200 text-sm font-medium text-gray-900"
+              className="divide-y divide-slate-800/80 max-h-96 overflow-y-auto pr-2 my-4"
             >
               {products.map((product) => (
-                <li key={product?.id} className="flex items-start space-x-4 py-6">
-                  <Image
-                    src={product?.image ? `/${product?.image}` : "/product_placeholder.jpg"}
-                    alt={product?.title}
-                    width={80}
-                    height={80}
-                    className="h-20 w-20 flex-none rounded-md object-cover object-center"
-                  />
-                  <div className="flex-auto space-y-1">
-                    <h3>{product?.title}</h3>
-                    <p className="text-gray-500">x{product?.amount}</p>
+                <li key={product?.id} className="flex items-center space-x-4 py-4">
+                  <div className="bg-slate-950 p-1.5 rounded-xl border border-slate-800 shrink-0">
+                    <Image
+                      src={product?.image ? `/${product?.image}` : "/product_placeholder.jpg"}
+                      alt={product?.title}
+                      width={64}
+                      height={64}
+                      className="h-16 w-16 object-contain"
+                    />
                   </div>
-                  <p className="flex-none text-base font-medium">
+                  <div className="flex-auto min-w-0">
+                    <h3 className="text-sm font-bold text-white truncate">{product?.title}</h3>
+                    <p className="text-xs text-slate-400">Qty: {product?.amount}</p>
+                  </div>
+                  <p className="flex-none text-base font-extrabold text-cyan-400">
                     ${product?.price}
                   </p>
                 </li>
               ))}
             </ul>
 
-            <dl className="hidden space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-900 lg:block">
+            <dl className="space-y-4 border-t border-slate-800 pt-6 text-sm">
               <div className="flex items-center justify-between">
-                <dt className="text-gray-600">Subtotal</dt>
-                <dd>${total}</dd>
+                <dt className="text-slate-400">Subtotal</dt>
+                <dd className="font-bold text-white">${total}</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-gray-600">Shipping</dt>
-                <dd>$5</dd>
+                <dt className="text-slate-400">Flat Rate Shipping</dt>
+                <dd className="font-bold text-white">$5.00</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-gray-600">Taxes</dt>
-                <dd>${total / 5}</dd>
+                <dt className="text-slate-400">Estimated Taxes</dt>
+                <dd className="font-bold text-white">${(total / 5).toFixed(2)}</dd>
               </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-6">
-                <dt className="text-base">Total</dt>
-                <dd className="text-base">
-                  ${total === 0 ? 0 : Math.round(total + total / 5 + 5)}
+              <div className="flex items-center justify-between border-t border-slate-800 pt-4 text-base">
+                <dt className="font-extrabold text-white">Grand Total</dt>
+                <dd className="font-black text-2xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                  ${total === 0 ? 0 : (total + total / 5 + 5).toFixed(2)}
                 </dd>
               </div>
             </dl>
           </div>
         </section>
-
-        <form className="px-4 pt-16 sm:px-6 lg:col-start-1 lg:row-start-1 lg:px-0">
-          <div className="mx-auto max-w-lg lg:max-w-none">
-            {/* Contact Information */}
-            <section aria-labelledby="contact-info-heading">
-              <h2
-                id="contact-info-heading"
-                className="text-lg font-medium text-gray-900"
-              >
-                Contact information
-              </h2>
-
-              <div className="mt-6">
-                <label
-                  htmlFor="name-input"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Name * (min 2 characters)
-                </label>
-                <div className="mt-1">
-                  <input
-                    value={checkoutForm.name}
-                    onChange={(e) =>
-                      setCheckoutForm({
-                        ...checkoutForm,
-                        name: e.target.value,
-                      })
-                    }
-                    type="text"
-                    id="name-input"
-                    name="name-input"
-                    autoComplete="given-name"
-                    required
-                    disabled={isSubmitting}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <label
-                  htmlFor="lastname-input"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Lastname * (min 2 characters)
-                </label>
-                <div className="mt-1">
-                  <input
-                    value={checkoutForm.lastname}
-                    onChange={(e) =>
-                      setCheckoutForm({
-                        ...checkoutForm,
-                        lastname: e.target.value,
-                      })
-                    }
-                    type="text"
-                    id="lastname-input"
-                    name="lastname-input"
-                    autoComplete="family-name"
-                    required
-                    disabled={isSubmitting}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <label
-                  htmlFor="phone-input"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Phone number * (min 10 digits)
-                </label>
-                <div className="mt-1">
-                  <input
-                    value={checkoutForm.phone}
-                    onChange={(e) =>
-                      setCheckoutForm({
-                        ...checkoutForm,
-                        phone: e.target.value,
-                      })
-                    }
-                    type="tel"
-                    id="phone-input"
-                    name="phone-input"
-                    autoComplete="tel"
-                    required
-                    disabled={isSubmitting}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <label
-                  htmlFor="email-address"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email address *
-                </label>
-                <div className="mt-1">
-                  <input
-                    value={checkoutForm.email}
-                    onChange={(e) =>
-                      setCheckoutForm({
-                        ...checkoutForm,
-                        email: e.target.value,
-                      })
-                    }
-                    type="email"
-                    id="email-address"
-                    name="email-address"
-                    autoComplete="email"
-                    required
-                    disabled={isSubmitting}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Payment Notice */}
-            <section className="mt-10">
-              <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-blue-800">
-                      Payment Information
-                    </h3>
-                    <div className="mt-2 text-sm text-blue-700">
-                      <p>Payment will be processed after order confirmation. You will be contacted for payment details.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Shipping Address */}
-            <section aria-labelledby="shipping-heading" className="mt-10">
-              <h2
-                id="shipping-heading"
-                className="text-lg font-medium text-gray-900"
-              >
-                Shipping address
-              </h2>
-
-              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-3">
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="company"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Company *
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      required
-                      disabled={isSubmitting}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      value={checkoutForm.company}
-                      onChange={(e) =>
-                        setCheckoutForm({
-                          ...checkoutForm,
-                          company: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="address"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Address *
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="address"
-                      name="address"
-                      autoComplete="street-address"
-                      required
-                      disabled={isSubmitting}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      value={checkoutForm.adress}
-                      onChange={(e) =>
-                        setCheckoutForm({
-                          ...checkoutForm,
-                          adress: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="apartment"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Apartment, suite, etc. * (required)
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="apartment"
-                      name="apartment"
-                      required
-                      disabled={isSubmitting}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      value={checkoutForm.apartment}
-                      onChange={(e) =>
-                        setCheckoutForm({
-                          ...checkoutForm,
-                          apartment: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="city"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    City *
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      autoComplete="address-level2"
-                      required
-                      disabled={isSubmitting}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      value={checkoutForm.city}
-                      onChange={(e) =>
-                        setCheckoutForm({
-                          ...checkoutForm,
-                          city: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="region"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Country *
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="region"
-                      name="region"
-                      autoComplete="address-level1"
-                      required
-                      disabled={isSubmitting}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      value={checkoutForm.country}
-                      onChange={(e) =>
-                        setCheckoutForm({
-                          ...checkoutForm,
-                          country: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="postal-code"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Postal code *
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="postal-code"
-                      name="postal-code"
-                      autoComplete="postal-code"
-                      required
-                      disabled={isSubmitting}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      value={checkoutForm.postalCode}
-                      onChange={(e) =>
-                        setCheckoutForm({
-                          ...checkoutForm,
-                          postalCode: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="order-notice"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Order notice
-                  </label>
-                  <div className="mt-1">
-                    <textarea
-                      className="textarea textarea-bordered textarea-lg w-full disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      id="order-notice"
-                      name="order-notice"
-                      autoComplete="order-notice"
-                      disabled={isSubmitting}
-                      value={checkoutForm.orderNotice}
-                      onChange={(e) =>
-                        setCheckoutForm({
-                          ...checkoutForm,
-                          orderNotice: e.target.value,
-                        })
-                      }
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <div className="mt-10 border-t border-gray-200 pt-6 ml-0">
-              <button
-                type="button"
-                onClick={makePurchase}
-                disabled={isSubmitting}
-                className="w-full rounded-md border border-transparent bg-blue-500 px-20 py-2 text-lg font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last disabled:bg-gray-400 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? "Processing Order..." : "Place Order"}
-              </button>
-            </div>
-          </div>
-        </form>
       </main>
     </div>
   );

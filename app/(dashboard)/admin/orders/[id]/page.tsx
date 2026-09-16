@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { DashboardSidebar } from "@/components";
 import apiClient from "@/lib/api";
 import { isValidEmailAddressFormat, isValidNameOrLastname } from "@/lib/utils";
@@ -140,254 +140,155 @@ const AdminSingleOrder = () => {
     });
   };
 
+  const inputClass = "w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm placeholder:text-slate-500 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200";
+  const labelClass = "block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5";
+  const selectClass = "w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 transition-all duration-200";
+
   return (
-    <div className="bg-white flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
+    <div className="bg-slate-950 min-h-screen flex justify-start max-w-screen-2xl mx-auto max-xl:flex-col max-xl:gap-y-5">
       <DashboardSidebar />
-      <div className="flex flex-col gap-y-7 xl:ml-5 w-full max-xl:px-5">
-        <h1 className="text-3xl font-semibold">Order details</h1>
-        <div className="mt-5">
-          <label className="w-full">
-            <div>
-              <span className="text-xl font-bold">Order ID:</span>
-              <span className="text-base"> {order?.id}</span>
-            </div>
-          </label>
-        </div>
-        <div className="flex gap-x-2 max-sm:flex-col">
-          <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Name:</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={order?.name}
-                onChange={(e) => setOrder({ ...order, name: e.target.value })}
-              />
-            </label>
-          </div>
-          <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Lastname:</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={order?.lastname}
-                onChange={(e) =>
-                  setOrder({ ...order, lastname: e.target.value })
-                }
-              />
-            </label>
-          </div>
+      <div className="flex flex-col gap-y-6 xl:ml-5 w-full max-xl:px-5 py-6">
+        <h1 className="text-2xl font-bold text-slate-100">Order Details</h1>
+
+        {/* Order ID */}
+        <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Order ID</span>
+          <p className="text-slate-200 font-mono mt-1">{order?.id}</p>
         </div>
 
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Phone number:</span>
-            </div>
-            <input
-              type="text"
-              className="input input-bordered w-full max-w-xs"
-              value={order?.phone}
-              onChange={(e) => setOrder({ ...order, phone: e.target.value })}
-            />
-          </label>
-        </div>
-
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Email adress:</span>
-            </div>
-            <input
-              type="email"
-              className="input input-bordered w-full max-w-xs"
-              value={order?.email}
-              onChange={(e) => setOrder({ ...order, email: e.target.value })}
-            />
-          </label>
-        </div>
-
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Company (optional):</span>
-            </div>
-            <input
-              type="text"
-              className="input input-bordered w-full max-w-xs"
-              value={order?.company}
-              onChange={(e) => setOrder({ ...order, company: e.target.value })}
-            />
-          </label>
-        </div>
-
-        <div className="flex gap-x-2 max-sm:flex-col">
+        {/* Customer info fields */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Address:</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={order?.adress}
-                onChange={(e) => setOrder({ ...order, adress: e.target.value })}
-              />
-            </label>
+            <label className={labelClass}>Name</label>
+            <input type="text" className={inputClass} value={order?.name} onChange={(e) => setOrder({ ...order, name: e.target.value })} />
           </div>
-
           <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Apartment, suite, etc. :</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={order?.apartment}
-                onChange={(e) =>
-                  setOrder({ ...order, apartment: e.target.value })
-                }
-              />
-            </label>
+            <label className={labelClass}>Lastname</label>
+            <input type="text" className={inputClass} value={order?.lastname} onChange={(e) => setOrder({ ...order, lastname: e.target.value })} />
           </div>
-        </div>
-
-        <div className="flex gap-x-2 max-sm:flex-col">
           <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">City:</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={order?.city}
-                onChange={(e) => setOrder({ ...order, city: e.target.value })}
-              />
-            </label>
+            <label className={labelClass}>Phone number</label>
+            <input type="text" className={inputClass} value={order?.phone} onChange={(e) => setOrder({ ...order, phone: e.target.value })} />
           </div>
-
           <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Country:</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={order?.country}
-                onChange={(e) =>
-                  setOrder({ ...order, country: e.target.value })
-                }
-              />
-            </label>
+            <label className={labelClass}>Email address</label>
+            <input type="email" className={inputClass} value={order?.email} onChange={(e) => setOrder({ ...order, email: e.target.value })} />
           </div>
-
           <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Postal Code:</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs"
-                value={order?.postalCode}
-                onChange={(e) =>
-                  setOrder({ ...order, postalCode: e.target.value })
-                }
-              />
-            </label>
+            <label className={labelClass}>Company (optional)</label>
+            <input type="text" className={inputClass} value={order?.company} onChange={(e) => setOrder({ ...order, company: e.target.value })} />
           </div>
-        </div>
-
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Order status</span>
-            </div>
+          <div>
+            <label className={labelClass}>Address</label>
+            <input type="text" className={inputClass} value={order?.adress} onChange={(e) => setOrder({ ...order, adress: e.target.value })} />
+          </div>
+          <div>
+            <label className={labelClass}>Apartment, suite, etc.</label>
+            <input type="text" className={inputClass} value={order?.apartment} onChange={(e) => setOrder({ ...order, apartment: e.target.value })} />
+          </div>
+          <div>
+            <label className={labelClass}>City</label>
+            <input type="text" className={inputClass} value={order?.city} onChange={(e) => setOrder({ ...order, city: e.target.value })} />
+          </div>
+          <div>
+            <label className={labelClass}>Country</label>
+            <input type="text" className={inputClass} value={order?.country} onChange={(e) => setOrder({ ...order, country: e.target.value })} />
+          </div>
+          <div>
+            <label className={labelClass}>Postal Code</label>
+            <input type="text" className={inputClass} value={order?.postalCode} onChange={(e) => setOrder({ ...order, postalCode: e.target.value })} />
+          </div>
+          <div>
+            <label className={labelClass}>Order Status</label>
             <select
-              className="select select-bordered"
+              className={selectClass}
               value={order?.status}
-              onChange={(e) =>
-                setOrder({
-                  ...order,
-                  status: e.target.value as
-                    | "processing"
-                    | "delivered"
-                    | "canceled",
-                })
-              }
+              onChange={(e) => setOrder({ ...order, status: e.target.value as "processing" | "delivered" | "canceled" })}
             >
               <option value="processing">Processing</option>
               <option value="delivered">Delivered</option>
               <option value="canceled">Canceled</option>
             </select>
-          </label>
+          </div>
         </div>
+
+        {/* Order notice */}
         <div>
-          <label className="form-control">
-            <div className="label">
-              <span className="label-text">Order notice:</span>
-            </div>
-            <textarea
-              className="textarea textarea-bordered h-24"
-              value={order?.orderNotice || ""}
-              onChange={(e) =>
-                setOrder({ ...order, orderNotice: e.target.value })
-              }
-            ></textarea>
-          </label>
+          <label className={labelClass}>Order Notice</label>
+          <textarea
+            className={`${inputClass} h-24 resize-none`}
+            value={order?.orderNotice || ""}
+            onChange={(e) => setOrder({ ...order, orderNotice: e.target.value })}
+          />
         </div>
+
+        {/* Order products */}
         <div>
-          {orderProducts?.map((product) => (
-            <div className="flex items-center gap-x-4" key={product?.id}>
-              <Image
-                src={product?.product?.mainImage ? `/${product?.product?.mainImage}` : "/product_placeholder.jpg"}
-                alt={product?.product?.title}
-                width={50}
-                height={50}
-                className="w-auto h-auto"
-              />
-              <div>
-                <Link href={`/product/${product?.product?.slug}`}>
-                  {product?.product?.title}
-                </Link>
-                <p>
-                  ${product?.product?.price} * {product?.quantity} items
-                </p>
+          <h2 className="text-lg font-bold text-slate-100 mb-4">Ordered Products</h2>
+          <div className="space-y-3">
+            {orderProducts?.map((product) => (
+              <div key={product?.id} className="flex items-center gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div className="w-14 h-14 rounded-xl overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700">
+                  <Image
+                    src={product?.product?.mainImage ? `/${product?.product?.mainImage}` : "/product_placeholder.jpg"}
+                    alt={product?.product?.title}
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <Link href={`/product/${product?.product?.slug}`} className="text-slate-200 font-semibold hover:text-cyan-400 transition-colors line-clamp-1">
+                    {product?.product?.title}
+                  </Link>
+                  <p className="text-sm text-slate-500 mt-0.5">
+                    ${product?.product?.price} Ã— {product?.quantity} items
+                  </p>
+                </div>
+                <span className="text-slate-200 font-bold">
+                  ${(product?.product?.price * product?.quantity).toFixed(2)}
+                </span>
               </div>
+            ))}
+          </div>
+
+          {/* Order totals */}
+          <div className="mt-6 p-5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+            <div className="flex justify-between text-slate-400 text-sm">
+              <span>Subtotal</span>
+              <span>${order?.total}</span>
             </div>
-          ))}
-          <div className="flex flex-col gap-y-2 mt-10">
-            <p className="text-2xl">Subtotal: ${order?.total}</p>
-            <p className="text-2xl">Tax 20%: ${order?.total / 5}</p>
-            <p className="text-2xl">Shipping: $5</p>
-            <p className="text-3xl font-semibold">
-              Total: ${order?.total + order?.total / 5 + 5}
-            </p>
+            <div className="flex justify-between text-slate-400 text-sm">
+              <span>Tax 20%</span>
+              <span>${(order?.total / 5).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-slate-400 text-sm">
+              <span>Shipping</span>
+              <span>$5.00</span>
+            </div>
+            <div className="flex justify-between text-slate-100 font-bold text-lg pt-2 border-t border-slate-800">
+              <span>Total</span>
+              <span>${(order?.total + order?.total / 5 + 5).toFixed(2)}</span>
+            </div>
           </div>
-          <div className="flex gap-x-2 max-sm:flex-col mt-5">
-            <button
-              type="button"
-              className="uppercase bg-blue-500 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2"
-              onClick={updateOrder}
-            >
-              Update order
-            </button>
-            <button
-              type="button"
-              className="uppercase bg-red-600 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2"
-              onClick={deleteOrder}
-            >
-              Delete order
-            </button>
-          </div>
+        </div>
+
+        {/* Action buttons */}
+        <div className="flex gap-3 flex-wrap pb-8">
+          <button
+            type="button"
+            className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl text-sm uppercase tracking-wider transition-all duration-200 shadow-lg shadow-cyan-500/20"
+            onClick={updateOrder}
+          >
+            Update Order
+          </button>
+          <button
+            type="button"
+            className="px-6 py-3 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold rounded-xl text-sm uppercase tracking-wider border border-rose-500/30 hover:border-rose-500/50 transition-all duration-200"
+            onClick={deleteOrder}
+          >
+            Delete Order
+          </button>
         </div>
       </div>
     </div>

@@ -46,97 +46,104 @@ const SingleProductPage = async ({ params }: SingleProductPageProps) => {
   }
 
   return (
-    <div className="bg-white">
-      <div className="max-w-screen-2xl mx-auto">
-        <div className="flex justify-center gap-x-16 pt-10 max-lg:flex-col items-center gap-y-5 px-5">
-          <div>
-            <Image
-              src={product?.mainImage ? `/${product?.mainImage}` : "/product_placeholder.jpg"}
-              width={500}
-              height={500}
-              alt="main image"
-              className="w-auto h-auto"
-            />
-            <div className="flex justify-around mt-5 flex-wrap gap-y-1 max-[500px]:justify-center max-[500px]:gap-x-1">
-              {images?.map((imageItem: ImageItem, key: number) => (
-                <Image
-                  key={imageItem.imageID + key}
-                  src={`/${imageItem.image}`}
-                  width={100}
-                  height={100}
-                  alt="laptop image"
-                  className="w-auto h-auto"
-                />
-              ))}
+    <div className="bg-slate-950 text-slate-100 min-h-screen py-10">
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start py-8">
+          {/* Left Column: Product Image Gallery */}
+          <div className="flex flex-col items-center bg-slate-900/80 border border-slate-800 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+            <div className="relative w-full max-w-md h-[400px] flex items-center justify-center p-6 bg-slate-950/60 rounded-2xl border border-slate-800/80 overflow-hidden group">
+              <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none" />
+              <Image
+                src={product?.mainImage ? `/${product?.mainImage}` : "/product_placeholder.jpg"}
+                width={450}
+                height={450}
+                alt={sanitize(product?.title) || "main image"}
+                className="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+              />
             </div>
+            {images && images.length > 0 && (
+              <div className="flex justify-center gap-3 mt-6 flex-wrap">
+                {images.map((imageItem: ImageItem, key: number) => (
+                  <div key={imageItem.imageID + key} className="p-2 bg-slate-950/80 border border-slate-800 rounded-xl hover:border-cyan-400 transition-colors cursor-pointer">
+                    <Image
+                      src={`/${imageItem.image}`}
+                      width={80}
+                      height={80}
+                      alt="product view"
+                      className="w-16 h-16 object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          <div className="flex flex-col gap-y-7 text-black max-[500px]:text-center">
-        
-            <h1 className="text-3xl">{sanitize(product?.title)}</h1>
-            <p className="text-xl font-semibold">${product?.price}</p>
-            <StockAvailabillity stock={94} inStock={product?.inStock} />
-            <SingleProductDynamicFields product={product} />
-            <div className="flex flex-col gap-y-2 max-[500px]:items-center">
-             
-              <p className="text-lg">
-                SKU: <span className="ml-1">abccd-18</span>
+
+          {/* Right Column: Details & Actions */}
+          <div className="flex flex-col gap-y-6 text-slate-200 bg-slate-900/60 border border-slate-800/80 rounded-3xl p-8 md:p-10 backdrop-blur-xl shadow-xl">
+            <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+              {sanitize(product?.title)}
+            </h1>
+
+            <div className="flex items-center gap-4">
+              <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                ${product?.price}
               </p>
-              <div className="text-lg flex gap-x-2">
-                <span>Share:</span>
-                <div className="flex items-center gap-x-1 text-2xl">
-                  <FaSquareFacebook />
-                  <FaSquareXTwitter />
-                  <FaSquarePinterest />
+              <StockAvailabillity stock={94} inStock={product?.inStock} />
+            </div>
+
+            <div className="pt-2 border-t border-slate-800/80">
+              <SingleProductDynamicFields product={product} />
+            </div>
+
+            <div className="flex flex-col gap-y-4 pt-6 border-t border-slate-800/80 text-sm">
+              <p className="text-slate-400 font-medium">
+                SKU: <span className="ml-1 text-slate-200 font-mono">ABCCD-18</span>
+              </p>
+
+              <div className="flex items-center gap-3">
+                <span className="text-slate-400 font-medium">Share:</span>
+                <div className="flex items-center gap-x-3 text-xl text-slate-400">
+                  <FaSquareFacebook className="hover:text-cyan-400 transition-colors cursor-pointer" />
+                  <FaSquareXTwitter className="hover:text-cyan-400 transition-colors cursor-pointer" />
+                  <FaSquarePinterest className="hover:text-cyan-400 transition-colors cursor-pointer" />
                 </div>
               </div>
-              <div className="flex gap-x-2">
+
+              <div className="flex gap-x-3 items-center pt-2">
                 <Image
                   src="/visa.svg"
                   width={50}
                   height={50}
                   alt="visa icon"
-                  className="w-auto h-auto"
+                  className="w-auto h-7 brightness-200 contrast-200"
                 />
                 <Image
                   src="/mastercard.svg"
                   width={50}
                   height={50}
                   alt="mastercard icon"
-                  className="h-auto w-auto"
+                  className="w-auto h-7 brightness-200 contrast-200"
                 />
                 <Image
                   src="/ae.svg"
                   width={50}
                   height={50}
-                  alt="americal express icon"
-                  className="h-auto w-auto"
+                  alt="american express icon"
+                  className="w-auto h-7 brightness-200 contrast-200"
                 />
                 <Image
                   src="/paypal.svg"
                   width={50}
                   height={50}
                   alt="paypal icon"
-                  className="w-auto h-auto"
-                />
-                <Image
-                  src="/dinersclub.svg"
-                  width={50}
-                  height={50}
-                  alt="diners club icon"
-                  className="h-auto w-auto"
-                />
-                <Image
-                  src="/discover.svg"
-                  width={50}
-                  height={50}
-                  alt="discover icon"
-                  className="h-auto w-auto"
+                  className="w-auto h-7 brightness-200 contrast-200"
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className="py-16">
+
+        <div className="py-12">
           <ProductTabs product={product} />
         </div>
       </div>

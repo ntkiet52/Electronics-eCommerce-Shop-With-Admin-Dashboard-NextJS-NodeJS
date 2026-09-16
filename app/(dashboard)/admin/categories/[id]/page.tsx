@@ -24,7 +24,6 @@ const DashboardSingleCategory = ({ params }: DashboardSingleCategoryProps) => {
     const requestOptions = {
       method: "DELETE",
     };
-    // sending API request for deleting a category
     apiClient
       .delete(`/api/categories/${id}`, requestOptions)
       .then((response) => {
@@ -65,7 +64,6 @@ const DashboardSingleCategory = ({ params }: DashboardSingleCategoryProps) => {
   };
 
   useEffect(() => {
-    // sending API request for getting single categroy
     apiClient
       .get(`/api/categories/${id}`)
       .then((res) => {
@@ -79,46 +77,47 @@ const DashboardSingleCategory = ({ params }: DashboardSingleCategoryProps) => {
   }, [id]);
 
   return (
-    <div className="bg-white flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
+    <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
       <DashboardSidebar />
-      <div className="flex flex-col gap-y-7 xl:pl-5 max-xl:px-5 w-full">
-        <h1 className="text-3xl font-semibold">Category details</h1>
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Category name:</span>
-            </div>
+      <div className="flex flex-col gap-y-6 p-6 lg:p-8 w-full">
+        <h1 className="text-2xl lg:text-3xl font-bold text-slate-100 tracking-tight">Category Details</h1>
+        
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md max-w-xl">
+          <div className="mb-6">
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+              Category Name
+            </label>
             <input
               type="text"
-              className="input input-bordered w-full max-w-xs"
+              className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
               value={formatCategoryName(categoryInput.name)}
               onChange={(e) =>
                 setCategoryInput({ ...categoryInput, name: e.target.value })
               }
             />
-          </label>
-        </div>
+          </div>
 
-        <div className="flex gap-x-2 max-sm:flex-col">
-          <button
-            type="button"
-            className="uppercase bg-blue-500 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2"
-            onClick={updateCategory}
-          >
-            Update category
-          </button>
-          <button
-            type="button"
-            className="uppercase bg-red-600 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2"
-            onClick={deleteCategory}
-          >
-            Delete category
-          </button>
+          <div className="flex gap-x-3 max-sm:flex-col gap-y-3">
+            <button
+              type="button"
+              className="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-cyan-500/20 text-sm"
+              onClick={updateCategory}
+            >
+              Update Category
+            </button>
+            <button
+              type="button"
+              className="px-6 py-2.5 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 font-bold rounded-xl transition-all duration-200 text-sm"
+              onClick={deleteCategory}
+            >
+              Delete Category
+            </button>
+          </div>
+          
+          <p className="mt-4 text-xs text-rose-400/80 bg-rose-500/10 border border-rose-500/20 rounded-lg p-3">
+            <strong>Note:</strong> Deleting this category will also remove all associated products.
+          </p>
         </div>
-        <p className="text-xl text-error max-sm:text-lg">
-          Note: if you delete this category, you will delete all products
-          associated with the category.
-        </p>
       </div>
     </div>
   );

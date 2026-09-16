@@ -42,70 +42,66 @@ export default function MerchantPage() {
   }, []);
 
   return (
-    <div className="flex h-screen">
+    <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto h-full max-xl:flex-col max-xl:h-fit max-xl:gap-y-4">
       <DashboardSidebar />
-      <div className="flex-1 p-10 overflow-y-auto">
+      <div className="w-full p-6 lg:p-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Merchants</h1>
+          <h1 className="text-2xl lg:text-3xl font-bold text-slate-100 tracking-tight">Merchants</h1>
           <Link
             href="/admin/merchant/new"
-            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
+            className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold px-4 py-2.5 rounded-xl transition-all duration-200 text-sm shadow-lg shadow-cyan-500/20"
           >
             Add Merchant
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden shadow-xl backdrop-blur-md">
           {loading ? (
-            <div className="text-center py-10">Loading merchants...</div>
+            <div className="text-center py-12 text-slate-400">Loading merchants...</div>
           ) : merchants.length > 0 ? (
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="py-3 text-left">Name</th>
-                  <th className="py-3 text-left">Email</th>
-                  <th className="py-3 text-left">Status</th>
-                  <th className="py-3 text-left">Products</th>
-                  <th className="py-3 text-left">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {merchants.map((merchant) => (
-                  <tr key={merchant.id} className="border-b hover:bg-gray-50">
-                    <td className="py-4">{merchant.name}</td>
-                    <td className="py-4">{merchant.email || "N/A"}</td>
-                    <td className="py-4">
-                      <span
-                        className={`px-2 py-1 rounded text-xs ${
-                          merchant.status === "ACTIVE"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
-                      >
-                        {merchant.status}
-                      </span>
-                    </td>
-                    <td className="py-4">{merchant.products.length}</td>
-                    <td className="py-4">
-                      <Link
-                        href={`/admin/merchant/${merchant.id}`}
-                        className="text-blue-500 hover:underline mr-3"
-                      >
-                        View
-                      </Link>
-                      <Link
-                        href={`/admin/merchant/${merchant.id}`}
-                        className="text-blue-500 hover:underline"
-                      >
-                        Edit
-                      </Link>
-                    </td>
+            <div className="overflow-x-auto max-h-[75vh]">
+              <table className="w-full text-left text-sm text-slate-300">
+                <thead className="bg-slate-800/80 text-xs font-semibold text-slate-400 uppercase tracking-wider sticky top-0 backdrop-blur-md border-b border-slate-800">
+                  <tr>
+                    <th className="p-4">Name</th>
+                    <th className="p-4">Email</th>
+                    <th className="p-4">Status</th>
+                    <th className="p-4">Products</th>
+                    <th className="p-4 text-right">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-800/60">
+                  {merchants.map((merchant) => (
+                    <tr key={merchant.id} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="p-4 font-medium text-slate-200">{merchant.name}</td>
+                      <td className="p-4 text-slate-400">{merchant.email || "N/A"}</td>
+                      <td className="p-4">
+                        <span
+                          className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${
+                            merchant.status === "ACTIVE"
+                              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                              : "bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                          }`}
+                        >
+                          {merchant.status}
+                        </span>
+                      </td>
+                      <td className="p-4 font-medium text-slate-300">{merchant.products.length}</td>
+                      <td className="p-4 text-right space-x-2">
+                        <Link
+                          href={`/admin/merchant/${merchant.id}`}
+                          className="px-3 py-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg border border-cyan-500/20 transition-all"
+                        >
+                          View / Edit
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
-            <div className="text-center py-10">No merchants found</div>
+            <div className="text-center py-12 text-slate-400">No merchants found</div>
           )}
         </div>
       </div>

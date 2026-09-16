@@ -16,11 +16,11 @@ import { FaHeart } from "react-icons/fa6";
 
 const HeartElement = ({wishQuantity}: {wishQuantity: number}) => {
   return (
-    <div className="relative">
-      <Link href="/wishlist">
-        <FaHeart className="text-2xl text-black" />
-        <span className="block w-6 h-6 font-bold bg-blue-600 text-white rounded-full flex justify-center items-center absolute top-[-17px] right-[-22px]">
-          { wishQuantity }
+    <div className="relative group">
+      <Link href="/wishlist" className="flex items-center justify-center p-2 rounded-xl text-slate-200 hover:text-rose-400 hover:bg-slate-800/60 transition-all duration-200">
+        <FaHeart className="text-xl" />
+        <span className="w-5 h-5 font-bold bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs rounded-full flex justify-center items-center absolute -top-1.5 -right-1.5 shadow-[0_0_10px_rgba(244,63,94,0.6)]">
+          {wishQuantity}
         </span>
       </Link>
     </div>

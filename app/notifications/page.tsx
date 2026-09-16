@@ -135,35 +135,37 @@ const NotificationsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-slate-950 text-slate-100 py-12">
+      <div className="max-w-4xl mx-auto px-6 md:px-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center space-x-3 mb-2">
-            <FaBell className="text-2xl text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900">Notification Center</h1>
+            <div className="p-2.5 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+              <FaBell className="text-2xl" />
+            </div>
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">Notification Center</h1>
           </div>
-          <p className="text-gray-600">
-            Manage and view all your notifications in one place
+          <p className="text-slate-400 text-sm font-light">
+            Manage and view all your account and order notifications in one place
           </p>
         </div>
 
         {/* Filters and Search */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-slate-900/80 rounded-3xl border border-slate-800 p-6 mb-6 backdrop-blur-xl shadow-xl space-y-4">
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="mb-4">
-            <div className="relative">
-              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <form onSubmit={handleSearch}>
+            <div className="relative flex items-center">
+              <FaSearch className="absolute left-4 text-slate-500" />
               <input
                 type="text"
                 placeholder="Search notifications..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full pl-11 pr-24 py-3 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 transition-all"
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                className="absolute right-2 px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-bold rounded-lg transition-all shadow-md shadow-cyan-500/20 cursor-pointer"
               >
                 Search
               </button>
@@ -171,17 +173,17 @@ const NotificationsPage = () => {
           </form>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex items-center space-x-2">
-              <FaFilter className="text-gray-400" />
-              <span className="text-sm font-medium text-gray-700">Filters:</span>
+          <div className="flex flex-wrap gap-4 items-center pt-2">
+            <div className="flex items-center space-x-2 text-slate-400 text-xs font-semibold uppercase tracking-wider">
+              <FaFilter className="text-cyan-400" />
+              <span>Filters:</span>
             </div>
 
             {/* Type Filter */}
             <select
               value={selectedType}
               onChange={(e) => handleTypeFilter(e.target.value)}
-              className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+              className="px-3 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-xs text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
             >
               <option value="all">All Types</option>
               <option value={NotificationType.ORDER_UPDATE}>Order Updates</option>
@@ -194,7 +196,7 @@ const NotificationsPage = () => {
             <select
               value={selectedStatus}
               onChange={(e) => handleStatusFilter(e.target.value)}
-              className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+              className="px-3 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-xs text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
             >
               <option value="all">All Status</option>
               <option value="unread">Unread</option>
@@ -217,7 +219,7 @@ const NotificationsPage = () => {
                   sortOrder: 'desc'
                 });
               }}
-              className="px-3 py-1 text-sm text-gray-600 hover:text-gray-800 underline"
+              className="px-3 py-2 text-xs font-medium text-cyan-400 hover:text-cyan-300 transition-colors underline cursor-pointer ml-auto"
             >
               Clear Filters
             </button>
@@ -226,24 +228,24 @@ const NotificationsPage = () => {
 
         {/* Bulk Actions */}
         {selectedIds.length > 0 && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-2xl p-4 mb-6 backdrop-blur-md">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-blue-700">
+              <span className="text-xs font-semibold text-cyan-300">
                 {selectedIds.length} notification(s) selected
               </span>
               <div className="flex space-x-3">
                 <button
                   onClick={handleBulkMarkAsRead}
-                  className="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-600 bg-white border border-blue-300 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                  className="inline-flex items-center px-3 py-1.5 text-xs font-bold text-cyan-300 bg-slate-900 border border-cyan-500/40 rounded-xl hover:bg-cyan-500/20 transition-all cursor-pointer"
                 >
-                  <FaCheckCircle className="w-4 h-4 mr-1" />
+                  <FaCheckCircle className="w-3.5 h-3.5 mr-1.5" />
                   Mark as Read
                 </button>
                 <button
                   onClick={handleBulkDelete}
-                  className="inline-flex items-center px-3 py-1 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-md hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1"
+                  className="inline-flex items-center px-3 py-1.5 text-xs font-bold text-rose-400 bg-slate-900 border border-rose-500/40 rounded-xl hover:bg-rose-500/20 transition-all cursor-pointer"
                 >
-                  <FaTrash className="w-4 h-4 mr-1" />
+                  <FaTrash className="w-3.5 h-3.5 mr-1.5" />
                   Delete
                 </button>
               </div>

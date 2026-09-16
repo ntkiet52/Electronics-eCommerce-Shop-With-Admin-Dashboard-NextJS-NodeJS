@@ -14,27 +14,38 @@ import React from 'react'
 
 const Incentives = () => {
   return (
-    <div>
-      <h2 className='text-3xl text-center py-5'>Best Customer Benefits</h2>
-    <div className="mx-auto max-w-screen-2xl py-10 sm:px-2 lg:px-4">
-      <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 px-4 lg:max-w-none lg:grid-cols-3">
-        {incentives.map((incentive) => (
-          <div key={incentive.name} className="text-center sm:flex sm:text-left lg:block lg:text-center">
-            <div className="sm:flex-shrink-0">
-              <div className="flow-root">
-                <Image width={48} height={48} className="mx-auto" src={incentive.imageSrc} alt={incentive.name} />
+    <div className="bg-slate-950 border-b border-slate-800/80 py-16">
+      <h2 className="text-3xl sm:text-4xl font-black text-center text-white uppercase tracking-tight mb-12">
+        WHY CHOOSE <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">SINGITRONIC</span>
+      </h2>
+      <div className="mx-auto max-w-screen-2xl px-6 md:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {incentives.map((incentive) => (
+            <div
+              key={incentive.name}
+              className="group flex flex-col items-center text-center p-8 bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 rounded-3xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(6,182,212,0.15)]"
+            >
+              <div className="p-4 rounded-2xl bg-slate-800/80 group-hover:bg-cyan-500/20 group-hover:scale-110 transition-all duration-300 mb-4 border border-slate-700/60">
+                <Image
+                  width={56}
+                  height={56}
+                  className="w-12 h-12 object-contain brightness-200 contrast-200"
+                  src={incentive.imageSrc}
+                  alt={incentive.name}
+                />
               </div>
+              <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                {incentive.name}
+              </h3>
+              <p className="mt-2 text-sm text-slate-400 leading-relaxed font-light">
+                {incentive.description}
+              </p>
             </div>
-            <div className="mt-3 sm:ml-3 sm:mt-0 lg:ml-0 lg:mt-3">
-              <h3 className="text-sm font-medium text-gray-900">{incentive.name}</h3>
-              <p className="mt-2 text-sm text-gray-500">{incentive.description}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-  )
+  );
 }
 
 export default Incentives

@@ -21,74 +21,56 @@ const DashboardCategory = () => {
   }, []);
 
   return (
-    <div className="bg-white flex justify-start max-w-screen-2xl mx-auto h-full max-xl:flex-col max-xl:h-fit max-xl:gap-y-4">
+    <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto h-full max-xl:flex-col max-xl:h-fit max-xl:gap-y-4">
       <DashboardSidebar />
-      <div className="w-full">
-        <h1 className="text-3xl font-semibold text-center mb-5">
-          All Categories
-        </h1>
-        <div className="flex justify-end mb-5">
-          <Link href="/admin/categories/new">
-            <CustomButton
-              buttonType="button"
-              customWidth="110px"
-              paddingX={10}
-              paddingY={5}
-              textSize="base"
-              text="Add new category"
-            />
+      <div className="w-full p-6 lg:p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl lg:text-3xl font-bold text-slate-100 tracking-tight">
+            All Categories
+          </h1>
+          <Link
+            href="/admin/categories/new"
+            className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold px-4 py-2.5 rounded-xl transition-all duration-200 text-sm shadow-lg shadow-cyan-500/20"
+          >
+            Add new category
           </Link>
         </div>
-        <div className="xl:ml-5 w-full max-xl:mt-5 overflow-auto w-full h-[80vh]">
-          <table className="table table-md table-pin-cols">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
-                <th>Name</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories &&
-                categories.map((category: Category) => (
-                  <tr key={nanoid()}>
-                    <th>
-                      <label>
-                        <input type="checkbox" className="checkbox" />
-                      </label>
-                    </th>
-
-                    <td>
-                      <div>
-                        <p>{formatCategoryName(category?.name)}</p>
-                      </div>
-                    </td>
-
-                    <th>
-                      <Link
-                        href={`/admin/categories/${category?.id}`}
-                        className="btn btn-ghost btn-xs"
-                      >
-                        details
-                      </Link>
-                    </th>
-                  </tr>
-                ))}
-            </tbody>
-            {/* foot */}
-            <tfoot>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th></th>
-              </tr>
-            </tfoot>
-          </table>
+        
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden shadow-xl backdrop-blur-md">
+          <div className="overflow-x-auto max-h-[75vh]">
+            <table className="w-full text-left text-sm text-slate-300">
+              <thead className="bg-slate-800/80 text-xs font-semibold text-slate-400 uppercase tracking-wider sticky top-0 backdrop-blur-md border-b border-slate-800">
+                <tr>
+                  <th className="p-4 w-12 text-center">
+                    <input type="checkbox" className="rounded border-slate-700 bg-slate-800 text-cyan-500 focus:ring-cyan-500/30" />
+                  </th>
+                  <th className="p-4">Name</th>
+                  <th className="p-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800/60">
+                {categories &&
+                  categories.map((category: Category) => (
+                    <tr key={nanoid()} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="p-4 text-center">
+                        <input type="checkbox" className="rounded border-slate-700 bg-slate-800 text-cyan-500 focus:ring-cyan-500/30" />
+                      </td>
+                      <td className="p-4 font-medium text-slate-200">
+                        {formatCategoryName(category?.name)}
+                      </td>
+                      <td className="p-4 text-right">
+                        <Link
+                          href={`/admin/categories/${category?.id}`}
+                          className="px-3 py-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg border border-cyan-500/20 transition-all"
+                        >
+                          Details
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

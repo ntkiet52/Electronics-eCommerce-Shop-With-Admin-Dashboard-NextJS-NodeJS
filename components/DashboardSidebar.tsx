@@ -22,55 +22,66 @@ import Link from "next/link";
 
 const DashboardSidebar = () => {
   return (
-    <div className="xl:w-[400px] bg-blue-500 h-full max-xl:w-full">
+    <div className="w-full xl:w-[320px] bg-slate-900/90 border-r border-slate-800/80 h-full min-h-screen p-4 space-y-2 backdrop-blur-xl">
+      <div className="px-4 py-3 text-xs font-bold text-cyan-400 uppercase tracking-widest border-b border-slate-800/80 mb-4">
+        Admin Controls
+      </div>
+
       <Link href="/admin">
-        <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-          <MdDashboard className="text-2xl" />{" "}
-          <span className="font-normal">Dashboard</span>
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <MdDashboard className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Dashboard</span>
         </div>
       </Link>
+
       <Link href="/admin/orders">
-        <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-          <FaBagShopping className="text-2xl" />{" "}
-          <span className="font-normal">Orders</span>
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <FaBagShopping className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Orders</span>
         </div>
       </Link>
+
       <Link href="/admin/products">
-        <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-          <FaTable className="text-2xl" />{" "}
-          <span className="font-normal">Products</span>
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <FaTable className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Products</span>
         </div>
       </Link>
+
       <Link href="/admin/bulk-upload">
-        <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-          <FaFileUpload className="text-2xl" />{" "}
-          <span className="font-normal">Bulk Upload</span>
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <FaFileUpload className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Bulk Upload</span>
         </div>
       </Link>
+
       <Link href="/admin/categories">
-        <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-          <MdCategory className="text-2xl" />{" "}
-          <span className="font-normal">Categories</span>
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <MdCategory className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Categories</span>
         </div>
       </Link>
+
       <Link href="/admin/users">
-        <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-          <FaRegUser className="text-2xl" />{" "}
-          <span className="font-normal">Users</span>
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <FaRegUser className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Users</span>
         </div>
       </Link>
+
       <Link href="/admin/merchant">
-        <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-          <FaStore className="text-2xl" />{" "}
-          <span className="font-normal">Merchant</span>
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <FaStore className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Merchant</span>
         </div>
       </Link>
-        <Link href="/admin/settings">
-            <div className="flex gap-x-2 w-full hover:bg-blue-600 cursor-pointer items-center py-6 pl-5 text-xl text-white">
-                <FaGear className="text-2xl" />{" "}
-                <span className="font-normal">Settings</span>
-            </div>
-        </Link>
+
+      <Link href="/admin/settings">
+        <div className="flex gap-x-3 w-full hover:bg-slate-800/80 hover:text-cyan-400 text-slate-300 rounded-xl cursor-pointer items-center py-3.5 px-4 text-base font-semibold transition-all group">
+          <FaGear className="text-xl text-cyan-400 group-hover:scale-110 transition-transform" />
+          <span>Settings</span>
+        </div>
+      </Link>
     </div>
   );
 };

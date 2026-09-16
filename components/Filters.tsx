@@ -50,13 +50,15 @@ const Filters = () => {
   }, [inputCategory, sortBy, page]);
 
   return (
-    <div>
-      <h3 className="text-2xl mb-2">Filters</h3>
-      <div className="divider"></div>
-      <div className="flex flex-col gap-y-1">
-        <h3 className="text-xl mb-2">Availability</h3>
-        <div className="form-control">
-          <label className="cursor-pointer flex items-center">
+    <div className="space-y-6 text-slate-200">
+      <h3 className="text-xl font-bold uppercase tracking-wider text-white pb-3 border-b border-slate-800">
+        Filter Products
+      </h3>
+
+      <div className="space-y-3">
+        <h4 className="text-sm font-semibold uppercase tracking-wider text-cyan-400">Availability</h4>
+        <div className="space-y-2">
+          <label className="cursor-pointer flex items-center gap-3 group">
             <input
               type="checkbox"
               checked={inputCategory.inStock.isChecked}
@@ -69,14 +71,12 @@ const Filters = () => {
                   },
                 })
               }
-              className="checkbox"
+              className="checkbox checkbox-primary rounded-lg border-slate-700 bg-slate-800"
             />
-            <span className="label-text text-lg ml-2 text-black">In stock</span>
+            <span className="text-sm text-slate-300 group-hover:text-white transition-colors">In stock</span>
           </label>
-        </div>
 
-        <div className="form-control">
-          <label className="cursor-pointer flex items-center">
+          <label className="cursor-pointer flex items-center gap-3 group">
             <input
               type="checkbox"
               checked={inputCategory.outOfStock.isChecked}
@@ -89,26 +89,25 @@ const Filters = () => {
                   },
                 })
               }
-              className="checkbox"
+              className="checkbox checkbox-primary rounded-lg border-slate-700 bg-slate-800"
             />
-            <span className="label-text text-lg ml-2 text-black">
+            <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
               Out of stock
             </span>
           </label>
         </div>
       </div>
 
-      <div className="divider"></div>
-      <div className="flex flex-col gap-y-1">
-        <h3 className="text-xl mb-2">Price</h3>
-        <div>
+      <div className="pt-4 border-t border-slate-800 space-y-3">
+        <h4 className="text-sm font-semibold uppercase tracking-wider text-cyan-400">Price Limit</h4>
+        <div className="space-y-2">
           <input
             type="range"
             min={0}
             max={3000}
             step={10}
             value={inputCategory.priceFilter.value}
-            className="range"
+            className="range range-accent accent-cyan-400 h-2 bg-slate-800 rounded-lg"
             onChange={(e) =>
               setInputCategory({
                 ...inputCategory,
@@ -119,14 +118,15 @@ const Filters = () => {
               })
             }
           />
-          <span>{`Max price: $${inputCategory.priceFilter.value}`}</span>
+          <div className="flex justify-between items-center text-xs text-slate-400">
+            <span>$0</span>
+            <span className="font-bold text-cyan-400">${inputCategory.priceFilter.value}</span>
+          </div>
         </div>
       </div>
 
-      <div className="divider"></div>
-
-      <div>
-        <h3 className="text-xl mb-2">Minimum Rating:</h3>
+      <div className="pt-4 border-t border-slate-800 space-y-3">
+        <h4 className="text-sm font-semibold uppercase tracking-wider text-cyan-400">Minimum Rating</h4>
         <input
           type="range"
           min={0}
@@ -138,16 +138,16 @@ const Filters = () => {
               ratingFilter: { text: "rating", value: Number(e.target.value) },
             })
           }
-          className="range range-info"
+          className="range range-info h-2 bg-slate-800 rounded-lg"
           step="1"
         />
-        <div className="w-full flex justify-between text-xs px-2">
-          <span>0</span>
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
-          <span>5</span>
+        <div className="w-full flex justify-between text-xs text-slate-400 px-1 font-medium">
+          <span>0★</span>
+          <span>1★</span>
+          <span>2★</span>
+          <span>3★</span>
+          <span>4★</span>
+          <span>5★</span>
         </div>
       </div>
     </div>

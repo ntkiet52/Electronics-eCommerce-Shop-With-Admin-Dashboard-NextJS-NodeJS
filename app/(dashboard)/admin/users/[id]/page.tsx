@@ -85,7 +85,6 @@ const DashboardSingleUserPage = ({ params }: DashboardUserDetailsProps) => {
   };
 
   useEffect(() => {
-    // sending API request for a single user
     apiClient
       .get(`/api/users/${id}`)
       .then((res) => {
@@ -101,74 +100,73 @@ const DashboardSingleUserPage = ({ params }: DashboardUserDetailsProps) => {
   }, [id]);
 
   return (
-    <div className="bg-white flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
+    <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
       <DashboardSidebar />
-      <div className="flex flex-col gap-y-7 xl:pl-5 max-xl:px-5 w-full">
-        <h1 className="text-3xl font-semibold">User details</h1>
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Email:</span>
-            </div>
+      <div className="flex flex-col gap-y-6 p-6 lg:p-8 w-full">
+        <h1 className="text-2xl lg:text-3xl font-bold text-slate-100 tracking-tight">User Details</h1>
+
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md max-w-xl space-y-5">
+          <div>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+              Email
+            </label>
             <input
               type="email"
-              className="input input-bordered w-full max-w-xs"
+              className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
               value={userInput.email}
               onChange={(e) =>
                 setUserInput({ ...userInput, email: e.target.value })
               }
             />
-          </label>
-        </div>
+          </div>
 
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">New password:</span>
-            </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+              New Password
+            </label>
             <input
               type="password"
-              className="input input-bordered w-full max-w-xs"
+              placeholder="Leave blank or enter new password"
+              className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
               onChange={(e) =>
                 setUserInput({ ...userInput, newPassword: e.target.value })
               }
               value={userInput.newPassword}
             />
-          </label>
-        </div>
+          </div>
 
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">User role: </span>
-            </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+              User Role
+            </label>
             <select
-              className="select select-bordered"
+              className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 transition-all duration-200"
               value={userInput.role}
               onChange={(e) =>
                 setUserInput({ ...userInput, role: e.target.value })
               }
             >
-              <option value="admin">admin</option>
-              <option value="user">user</option>
+              <option value="admin" className="bg-slate-900 text-slate-200">admin</option>
+              <option value="user" className="bg-slate-900 text-slate-200">user</option>
             </select>
-          </label>
-        </div>
-        <div className="flex gap-x-2 max-sm:flex-col">
-          <button
-            type="button"
-            className="uppercase bg-blue-500 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2"
-            onClick={updateUser}
-          >
-            Update user
-          </button>
-          <button
-            type="button"
-            className="uppercase bg-red-600 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2"
-            onClick={deleteUser}
-          >
-            Delete user
-          </button>
+          </div>
+
+          <div className="flex gap-x-3 pt-2 max-sm:flex-col gap-y-3">
+            <button
+              type="button"
+              className="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-cyan-500/20 text-sm"
+              onClick={updateUser}
+            >
+              Update User
+            </button>
+            <button
+              type="button"
+              className="px-6 py-2.5 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 font-bold rounded-xl transition-all duration-200 text-sm"
+              onClick={deleteUser}
+            >
+              Delete User
+            </button>
+          </div>
         </div>
       </div>
     </div>

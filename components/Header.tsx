@@ -76,15 +76,23 @@ const Header = () => {
   }, [session?.user?.email, wishlist.length]);
 
   return (
-    <header className="bg-white">
+    <header className="bg-slate-950 sticky top-0 z-50 backdrop-blur-xl border-b border-slate-800/80 shadow-lg">
       <HeaderTop />
       {pathname.startsWith("/admin") === false && (
-        <div className="h-32 bg-white flex items-center justify-between px-16 max-[1320px]:px-16 max-md:px-6 max-lg:flex-col max-lg:gap-y-7 max-lg:justify-center max-lg:h-60 max-w-screen-2xl mx-auto">
-          <Link href="/">
-            <img src="/logo v1 svg.svg" width={300} height={300} alt="singitronic logo" className="relative right-5 max-[1023px]:w-56" />
+        <div className="py-4 bg-slate-950/90 flex items-center justify-between px-6 md:px-12 max-lg:flex-col max-lg:gap-y-5 max-lg:justify-center max-w-screen-2xl mx-auto">
+          <Link href="/" className="flex items-center gap-2 group">
+            <img
+              src="/logo v1 svg.svg"
+              width={260}
+              height={60}
+              alt="singitronic logo"
+              className="brightness-200 contrast-200 hover:scale-105 transition-transform duration-300"
+            />
           </Link>
-          <SearchInput />
-          <div className="flex gap-x-10 items-center">
+          <div className="w-full lg:max-w-xl mx-4">
+            <SearchInput />
+          </div>
+          <div className="flex gap-x-6 sm:gap-x-8 items-center">
             <NotificationBell />
             <HeartElement wishQuantity={wishQuantity} />
             <CartElement />
@@ -92,40 +100,40 @@ const Header = () => {
         </div>
       )}
       {pathname.startsWith("/admin") === true && (
-        <div className="flex justify-between h-32 bg-white items-center px-16 max-[1320px]:px-10  max-w-screen-2xl mx-auto max-[400px]:px-5">
+        <div className="flex justify-between py-4 bg-slate-950/90 items-center px-6 md:px-12 max-w-screen-2xl mx-auto border-b border-slate-800/60">
           <Link href="/">
             <Image
               src="/logo v1.png"
-              width={130}
-              height={130}
+              width={140}
+              height={40}
               alt="singitronic logo"
-              className="w-56 h-auto"
+              className="w-48 h-auto brightness-200 contrast-200"
             />
           </Link>
-          <div className="flex gap-x-5 items-center">
+          <div className="flex gap-x-6 items-center">
             <NotificationBell />
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="w-10">
+              <div tabIndex={0} role="button" className="w-10 h-10 rounded-full ring-2 ring-cyan-500/40 hover:ring-cyan-400 transition-all overflow-hidden">
                 <Image
                   src="/randomuser.jpg"
                   alt="random profile photo"
-                  width={30}
-                  height={30}
-                  className="w-full h-full rounded-full"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
                 />
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content z-[50] menu p-2 shadow-2xl bg-slate-900 border border-slate-800 rounded-xl w-52 text-slate-200 mt-2"
               >
                 <li>
-                  <Link href="/admin">Dashboard</Link>
+                  <Link href="/admin" className="hover:text-cyan-400 hover:bg-slate-800/60">Dashboard</Link>
                 </li>
                 <li>
-                  <a>Profile</a>
+                  <a className="hover:text-cyan-400 hover:bg-slate-800/60">Profile</a>
                 </li>
                 <li onClick={handleLogout}>
-                  <a href="#">Logout</a>
+                  <a href="#" className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10">Logout</a>
                 </li>
               </ul>
             </div>

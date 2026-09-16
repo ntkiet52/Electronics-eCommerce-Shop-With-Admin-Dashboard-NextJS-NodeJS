@@ -1,4 +1,4 @@
-// *********************
+﻿// *********************
 // Role of the component: Bulk upload products page for admin dashboard
 // Name of the component: BulkUpload.tsx
 // Developer: Aleksandar Kuzmanovic (modified)
@@ -152,22 +152,17 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
   };
 
   return (
-    <div className="flex xl:flex-row flex-col justify-start items-start">
+    <div className="bg-slate-950 min-h-screen flex justify-start items-start max-w-screen-2xl mx-auto xl:flex-row flex-col">
       <DashboardSidebar />
-      <div className="w-full xl:p-14 p-4">
-        <h1 className="text-4xl font-bold mb-8">Bulk Upload Products</h1>
+      <div className="w-full xl:p-10 p-4">
+        <h1 className="text-2xl font-bold text-slate-100 mb-8">Bulk Upload Products</h1>
 
         {/* Instructions */}
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-          <h2 className="text-lg font-semibold mb-2 text-blue-800">
-            📋 Instructions
-          </h2>
-          <ul className="list-disc list-inside space-y-1 text-sm text-blue-700">
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6">
+          <h2 className="text-base font-semibold mb-2 text-blue-300">ðŸ“‹ Instructions</h2>
+          <ul className="list-disc list-inside space-y-1 text-sm text-blue-400/80">
             <li>Download the CSV template below</li>
-            <li>
-              Fill in your product data (title, price, manufacturer, stock,
-              image URL, description, slug, categoryId)
-            </li>
+            <li>Fill in your product data (title, price, manufacturer, stock, image URL, description, slug, categoryId)</li>
             <li>Upload the completed CSV file</li>
             <li>Maximum file size: 5MB</li>
           </ul>
@@ -177,7 +172,7 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
         <div className="mb-6">
           <button
             onClick={downloadTemplate}
-            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold rounded-xl hover:bg-emerald-500/20 transition-all duration-200 text-sm"
           >
             <FaDownload /> Download CSV Template
           </button>
@@ -186,24 +181,24 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
         {/* File Upload Area */}
         <div className="mb-6">
           <div
-            className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+            className={`border-2 border-dashed rounded-xl p-10 text-center transition-all duration-200 ${
               dragActive
-                ? "border-blue-500 bg-blue-50"
-                : "border-gray-300 bg-gray-50 hover:border-gray-400"
+                ? "border-cyan-500 bg-cyan-500/10"
+                : "border-slate-700 bg-slate-900/40 hover:border-slate-600"
             }`}
             onDragEnter={handleDrag}
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
           >
-            <FaFileUpload className="text-6xl text-gray-400 mx-auto mb-4" />
-            <p className="text-lg mb-2">
+            <FaFileUpload className="text-5xl text-slate-600 mx-auto mb-4" />
+            <p className="text-base mb-4 text-slate-300">
               {file ? (
-                <span className="font-semibold text-blue-600">
+                <span className="font-semibold text-cyan-400">
                   Selected: {file.name} ({(file.size / 1024).toFixed(2)} KB)
                 </span>
               ) : (
-                "Drag and drop CSV file here, or click to select"
+                <span className="text-slate-400">Drag and drop CSV file here, or click to select</span>
               )}
             </p>
             <input
@@ -216,7 +211,7 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
             />
             <label
               htmlFor="file-upload"
-              className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded cursor-pointer transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-semibold rounded-xl cursor-pointer hover:bg-cyan-500/20 transition-all duration-200 text-sm"
             >
               Select CSV File
             </label>
@@ -229,33 +224,17 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
             <button
               onClick={handleUpload}
               disabled={uploading}
-              className={`w-full py-4 px-6 rounded-lg font-bold text-white text-lg transition-colors ${
+              className={`w-full py-3.5 px-6 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-200 ${
                 uploading
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-blue-500 hover:bg-blue-600"
+                  ? "bg-slate-700 text-slate-400 cursor-not-allowed"
+                  : "bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-lg shadow-cyan-500/20"
               }`}
             >
               {uploading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <svg
-                    className="animate-spin h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
+                  <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
                   Uploading...
                 </span>
@@ -268,74 +247,57 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
 
         {/* Upload Result */}
         {uploadResult && (
-          <div
-            className={`border-l-4 p-6 rounded-lg ${
-              uploadResult.success
-                ? "bg-green-50 border-green-500"
-                : "bg-red-50 border-red-500"
-            }`}
-          >
+          <div className={`border rounded-xl p-5 mb-6 ${
+            uploadResult.success
+              ? "bg-emerald-500/10 border-emerald-500/30"
+              : "bg-rose-500/10 border-rose-500/30"
+          }`}>
             <div className="flex items-start gap-3">
               {uploadResult.success ? (
-                <FaCheckCircle className="text-3xl text-green-500 flex-shrink-0 mt-1" />
+                <FaCheckCircle className="text-2xl text-emerald-400 flex-shrink-0 mt-1" />
               ) : (
-                <FaTimesCircle className="text-3xl text-red-500 flex-shrink-0 mt-1" />
+                <FaTimesCircle className="text-2xl text-rose-400 flex-shrink-0 mt-1" />
               )}
               <div className="flex-1">
-                <h3
-                  className={`text-xl font-bold mb-2 ${
-                    uploadResult.success ? "text-green-800" : "text-red-800"
-                  }`}
-                >
-                  {uploadResult.success
-                    ? "✅ Upload Successful!"
-                    : "❌ Upload Failed"}
+                <h3 className={`text-base font-bold mb-1 ${
+                  uploadResult.success ? "text-emerald-300" : "text-rose-300"
+                }`}>
+                  {uploadResult.success ? "âœ… Upload Successful!" : "âŒ Upload Failed"}
                 </h3>
-                <p
-                  className={`mb-3 ${
-                    uploadResult.success ? "text-green-700" : "text-red-700"
-                  }`}
-                >
+                <p className={`text-sm ${
+                  uploadResult.success ? "text-emerald-400/80" : "text-rose-400/80"
+                }`}>
                   {uploadResult.message}
                 </p>
 
                 {uploadResult.details && (
-                  <div className="bg-white rounded p-4 space-y-2">
-                    <p className="font-semibold">Upload Statistics:</p>
+                  <div className="mt-4 bg-slate-800/60 rounded-xl p-4 space-y-3">
+                    <p className="font-semibold text-slate-300 text-sm">Upload Statistics:</p>
                     <div className="grid grid-cols-3 gap-4">
                       <div className="text-center">
-                        <p className="text-2xl font-bold text-blue-600">
-                          {uploadResult.details.processed}
-                        </p>
-                        <p className="text-sm text-gray-600">Processed</p>
+                        <p className="text-2xl font-bold text-cyan-400">{uploadResult.details.processed}</p>
+                        <p className="text-xs text-slate-400">Processed</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-2xl font-bold text-green-600">
-                          {uploadResult.details.successful}
-                        </p>
-                        <p className="text-sm text-gray-600">Successful</p>
+                        <p className="text-2xl font-bold text-emerald-400">{uploadResult.details.successful}</p>
+                        <p className="text-xs text-slate-400">Successful</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-2xl font-bold text-red-600">
-                          {uploadResult.details.failed}
-                        </p>
-                        <p className="text-sm text-gray-600">Failed</p>
+                        <p className="text-2xl font-bold text-rose-400">{uploadResult.details.failed}</p>
+                        <p className="text-xs text-slate-400">Failed</p>
                       </div>
                     </div>
 
-                    {uploadResult.details.errors &&
-                      uploadResult.details.errors.length > 0 && (
-                        <div className="mt-4">
-                          <p className="font-semibold text-red-700 mb-2">
-                            Errors:
-                          </p>
-                          <ul className="list-disc list-inside space-y-1 text-sm text-red-600 max-h-40 overflow-y-auto">
-                            {uploadResult.details.errors.map((error, index) => (
-                              <li key={index}>{error}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                    {uploadResult.details.errors && uploadResult.details.errors.length > 0 && (
+                      <div className="mt-3">
+                        <p className="font-semibold text-rose-400 text-sm mb-2">Errors:</p>
+                        <ul className="list-disc list-inside space-y-1 text-xs text-rose-400/80 max-h-40 overflow-y-auto">
+                          {uploadResult.details.errors.map((error, index) => (
+                            <li key={index}>{error}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -344,107 +306,40 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
         )}
 
         {/* CSV Format Guide */}
-        <div className="mt-8 bg-gray-50 rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-4">📝 CSV Format Guide</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-300 text-sm">
+        <div className="mt-8 bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+          <h2 className="text-lg font-bold text-slate-100 mb-5">ðŸ“ CSV Format Guide</h2>
+          <div className="overflow-x-auto rounded-xl border border-slate-800">
+            <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-100">
-                  <th className="border border-gray-300 px-4 py-2 text-left">
-                    Column
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2 text-left">
-                    Required
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2 text-left">
-                    Type
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2 text-left">
-                    Description
-                  </th>
+                <tr className="border-b border-slate-800">
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Column</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Required</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Type</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Description</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    title
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">✅ Yes</td>
-                  <td className="border border-gray-300 px-4 py-2">String</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Product name
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    price
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">✅ Yes</td>
-                  <td className="border border-gray-300 px-4 py-2">Number</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Product price (e.g., 99.99)
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    manufacturer
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">✅ Yes</td>
-                  <td className="border border-gray-300 px-4 py-2">String</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Manufacturer/Brand name
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    inStock
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">❌ No</td>
-                  <td className="border border-gray-300 px-4 py-2">Number</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Stock quantity (default: 0)
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    mainImage
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">❌ No</td>
-                  <td className="border border-gray-300 px-4 py-2">URL</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Product image URL
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    description
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">✅ Yes</td>
-                  <td className="border border-gray-300 px-4 py-2">String</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Product description
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    slug
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">✅ Yes</td>
-                  <td className="border border-gray-300 px-4 py-2">String</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    URL-friendly identifier
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-mono">
-                    categoryId
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">✅ Yes</td>
-                  <td className="border border-gray-300 px-4 py-2">UUID</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Category ID from database
-                  </td>
-                </tr>
+              <tbody className="divide-y divide-slate-800/70">
+                {[
+                  { col: "title", req: true, type: "String", desc: "Product name" },
+                  { col: "price", req: true, type: "Number", desc: "Product price (e.g., 99.99)" },
+                  { col: "manufacturer", req: true, type: "String", desc: "Manufacturer/Brand name" },
+                  { col: "inStock", req: false, type: "Number", desc: "Stock quantity (default: 0)" },
+                  { col: "mainImage", req: false, type: "URL", desc: "Product image URL" },
+                  { col: "description", req: true, type: "String", desc: "Product description" },
+                  { col: "slug", req: true, type: "String", desc: "URL-friendly identifier" },
+                  { col: "categoryId", req: true, type: "UUID", desc: "Category ID from database" },
+                ].map((row) => (
+                  <tr key={row.col} className="hover:bg-slate-800/40 transition-colors">
+                    <td className="px-4 py-3 font-mono text-cyan-400 text-xs">{row.col}</td>
+                    <td className="px-4 py-3">
+                      {row.req
+                        ? <span className="text-xs font-semibold text-emerald-400">âœ… Yes</span>
+                        : <span className="text-xs font-semibold text-slate-500">âŒ No</span>}
+                    </td>
+                    <td className="px-4 py-3 text-slate-400 text-xs">{row.type}</td>
+                    <td className="px-4 py-3 text-slate-400 text-xs">{row.desc}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -460,3 +355,4 @@ Another Product,149.99,Another Manufacturer,5,https://example.com/image2.jpg,Ano
 };
 
 export default BulkUploadPage;
+

@@ -32,23 +32,33 @@ const SearchPage = async ({ searchParams }: Props) => {
   }
 
   return (
-    <div>
-      <SectionTitle title="Search Page" path="Home | Search" />
-      <div className="max-w-screen-2xl mx-auto">
+    <div className="bg-slate-950 text-slate-100 min-h-screen pb-16">
+      <SectionTitle title="Search Results" path="Home | Search" />
+      <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
         {sp?.search && (
-          <h3 className="text-4xl text-center py-10 max-sm:text-3xl">
-            Showing results for {sanitize(sp?.search)}
+          <h3 className="text-2xl sm:text-3xl font-bold text-center py-8 text-slate-200">
+            Showing results for <span className="text-cyan-400 font-extrabold">"{sanitize(sp?.search)}"</span>
           </h3>
         )}
-        <div className="grid grid-cols-4 justify-items-center gap-x-2 gap-y-5 max-[1300px]:grid-cols-3 max-lg:grid-cols-2 max-[500px]:grid-cols-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
           {products.length > 0 ? (
             products.map((product: any) => (
-              <ProductItem key={product.id} product={product} color="black" />
+              <ProductItem key={product.id} product={product} color="white" />
             ))
           ) : (
-            <h3 className="text-3xl mt-5 text-center w-full col-span-full max-[1000px]:text-2xl max-[500px]:text-lg">
-              No products found for specified query
-            </h3>
+            <div className="col-span-full py-16 text-center space-y-4">
+              <div className="w-16 h-16 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto text-slate-500">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-slate-300">
+                No products found matching your search query
+              </h3>
+              <p className="text-sm text-slate-500 max-w-md mx-auto">
+                Try checking for spelling errors, using more generic search terms, or browsing categories.
+              </p>
+            </div>
           )}
         </div>
       </div>

@@ -20,31 +20,34 @@ const ProductTabs = ({ product }: { product: Product }) => {
   const [currentProductTab, setCurrentProductTab] = useState<number>(0);
 
   return (
-    <div className="px-5 text-black">
-      <div role="tablist" className="tabs tabs-bordered">
-        <a
-          role="tab"
-          className={`tab text-lg text-black pb-8 max-[500px]:text-base max-[400px]:text-sm max-[370px]:text-xs ${
-            currentProductTab === 0 && "tab-active"
+    <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 md:p-8 text-slate-200 backdrop-blur-xl shadow-xl">
+      <div className="flex border-b border-slate-800 gap-6 pb-4">
+        <button
+          className={`text-lg font-bold pb-2 transition-all border-b-2 cursor-pointer ${
+            currentProductTab === 0
+              ? "text-cyan-400 border-cyan-400"
+              : "text-slate-400 border-transparent hover:text-slate-200"
           }`}
           onClick={() => setCurrentProductTab(0)}
         >
           Description
-        </a>
-        <a
-          role="tab"
-          className={`tab text-black text-lg pb-8 max-[500px]:text-base max-[400px]:text-sm max-[370px]:text-xs ${
-            currentProductTab === 1 && "tab-active"
+        </button>
+        <button
+          className={`text-lg font-bold pb-2 transition-all border-b-2 cursor-pointer ${
+            currentProductTab === 1
+              ? "text-cyan-400 border-cyan-400"
+              : "text-slate-400 border-transparent hover:text-slate-200"
           }`}
           onClick={() => setCurrentProductTab(1)}
         >
-          Additional info
-        </a>
+          Additional Info
+        </button>
       </div>
-      <div className="pt-5">
+
+      <div className="pt-6">
         {currentProductTab === 0 && (
           <div 
-            className="text-lg max-sm:text-base max-sm:text-sm"
+            className="text-slate-300 text-base leading-relaxed prose prose-invert max-w-none font-light"
             dangerouslySetInnerHTML={{ 
               __html: sanitizeHtml(product?.description) 
             }}
@@ -53,26 +56,23 @@ const ProductTabs = ({ product }: { product: Product }) => {
 
         {currentProductTab === 1 && (
           <div className="overflow-x-auto">
-            <table className="table text-xl text-center max-[500px]:text-base">
+            <table className="w-full text-left text-sm text-slate-300 border-collapse">
               <tbody>
-                {/* row 1 */}
-                <tr>
-                  <th>Manufacturer:</th>
-                  <td>{sanitize(product?.manufacturer)}</td>
+                <tr className="border-b border-slate-800/80">
+                  <th className="py-3 px-4 font-semibold text-cyan-400 w-1/3">Manufacturer</th>
+                  <td className="py-3 px-4">{sanitize(product?.manufacturer)}</td>
                 </tr>
-                {/* row 2 */}
-                <tr>
-                  <th>Category:</th>
-                  <td>
+                <tr className="border-b border-slate-800/80">
+                  <th className="py-3 px-4 font-semibold text-cyan-400">Category</th>
+                  <td className="py-3 px-4">
                     {product?.category?.name
                       ? sanitize(formatCategoryName(product?.category?.name))
                       : "No category"}
                   </td>
                 </tr>
-                {/* row 3 */}
                 <tr>
-                  <th>Color:</th>
-                  <td>Silver, LightSlateGray, Blue</td>
+                  <th className="py-3 px-4 font-semibold text-cyan-400">Available Colors</th>
+                  <td className="py-3 px-4">Silver, Space Gray, Deep Cyan, Obsidian</td>
                 </tr>
               </tbody>
             </table>

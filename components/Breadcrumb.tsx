@@ -14,19 +14,21 @@ import { FaHouse } from "react-icons/fa6";
 
 const Breadcrumb = () => {
   return (
-    <div className="text-lg breadcrumbs pb-10 py-5 max-sm:text-base">
-      <ul>
+    <div className="text-sm font-medium text-slate-400 py-4 mb-2">
+      <ul className="flex items-center gap-2 flex-wrap">
         <li>
-          <Link href="/">
-            <FaHouse className="mr-2" />
+          <Link href="/" className="inline-flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+            <FaHouse className="text-xs text-cyan-400" />
             Home
           </Link>
         </li>
+        <li className="text-slate-600">/</li>
         <li>
-          <Link href="/shop">Shop</Link>
+          <Link href="/shop" className="hover:text-cyan-400 transition-colors">Shop</Link>
         </li>
-        <li>
-          <Link href="/shop">All products</Link>
+        <li className="text-slate-600">/</li>
+        <li className="text-slate-200 font-semibold">
+          All Products
         </li>
       </ul>
     </div>

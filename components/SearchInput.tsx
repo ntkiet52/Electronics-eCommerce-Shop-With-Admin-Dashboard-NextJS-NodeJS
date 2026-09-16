@@ -27,15 +27,18 @@ const SearchInput = () => {
   };
 
   return (
-    <form className="flex w-full justify-center" onSubmit={searchProducts}>
+    <form className="flex w-full justify-center group" onSubmit={searchProducts}>
       <input
         type="text"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
-        placeholder="Type here"
-        className="bg-gray-50 input input-bordered w-[70%] rounded-r-none outline-none focus:outline-none max-sm:w-full"
+        placeholder="Search next-gen electronics, phones, laptops..."
+        className="w-full bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-400 px-4 py-2.5 rounded-l-xl outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all duration-200"
       />
-      <button type="submit" className="btn bg-blue-500 text-white rounded-l-none rounded-r-xl hover:bg-blue-600">
+      <button
+        type="submit"
+        className="bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 hover:from-blue-500 hover:to-cyan-300 text-white font-bold px-6 py-2.5 rounded-r-xl text-sm transition-all duration-200 shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/40 shrink-0"
+      >
         Search
       </button>
     </form>

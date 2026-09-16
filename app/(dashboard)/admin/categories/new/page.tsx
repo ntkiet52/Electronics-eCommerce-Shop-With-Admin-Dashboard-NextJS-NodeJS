@@ -37,34 +37,35 @@ const DashboardNewCategoryPage = () => {
       toast.error("You need to enter values to add a category");
     }
   };
+
   return (
-    <div className="bg-white flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
+    <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
       <DashboardSidebar />
-      <div className="flex flex-col gap-y-7 xl:pl-5 max-xl:px-5 w-full">
-        <h1 className="text-3xl font-semibold">Add new category</h1>
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Category name:</span>
-            </div>
+      <div className="flex flex-col gap-y-6 p-6 lg:p-8 w-full">
+        <h1 className="text-2xl lg:text-3xl font-bold text-slate-100 tracking-tight">Add New Category</h1>
+        
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md max-w-xl">
+          <div className="mb-6">
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+              Category Name
+            </label>
             <input
               type="text"
-              className="input input-bordered w-full max-w-xs"
+              className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
+              placeholder="e.g. Smart Watches"
               value={categoryInput.name}
               onChange={(e) =>
                 setCategoryInput({ ...categoryInput, name: e.target.value })
               }
             />
-          </label>
-        </div>
+          </div>
 
-        <div className="flex gap-x-2">
           <button
             type="button"
-            className="uppercase bg-blue-500 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2"
+            className="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-cyan-500/20 text-sm"
             onClick={addNewCategory}
           >
-            Create category
+            Create Category
           </button>
         </div>
       </div>

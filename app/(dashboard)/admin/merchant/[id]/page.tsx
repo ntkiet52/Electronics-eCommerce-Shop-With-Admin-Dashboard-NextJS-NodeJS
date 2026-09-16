@@ -31,7 +31,6 @@ interface MerchantDetailPageProps {
 export default function MerchantDetailPage({
   params,
 }: MerchantDetailPageProps) {
-  // Unwrap params using React.use()
   const resolvedParams = use(params);
   const id = resolvedParams.id;
   
@@ -83,7 +82,7 @@ export default function MerchantDetailPage({
     fetchMerchant();
   }, [id]); 
 
-const handleInputChange = (
+  const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
@@ -92,24 +91,22 @@ const handleInputChange = (
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    // This is the correct way to use apiClient.put
-    // It should just take the URL and the data object
-    const response = await apiClient.put(`/api/merchants/${id}`, formData);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await apiClient.put(`/api/merchants/${id}`, formData);
 
-    if (!response.ok) {
-      throw new Error("Failed to update merchant");
+      if (!response.ok) {
+        throw new Error("Failed to update merchant");
+      }
+
+      toast.success("Merchant updated successfully");
+      fetchMerchant();
+    } catch (error) {
+      console.error("Error updating merchant:", error);
+      toast.error("Failed to update merchant");
     }
-
-    toast.success("Merchant updated successfully");
-    fetchMerchant(); // Refresh data
-  } catch (error) {
-    console.error("Error updating merchant:", error);
-    toast.error("Failed to update merchant");
-  }
-};
+  };
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this merchant?")) {
@@ -138,9 +135,9 @@ const handleInputChange = (
 
   if (loading) {
     return (
-      <div className="flex h-screen">
+      <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto h-full max-xl:flex-col">
         <DashboardSidebar />
-        <div className="flex-1 p-10 flex items-center justify-center">
+        <div className="flex-1 p-10 flex items-center justify-center text-slate-400">
           Loading merchant details...
         </div>
       </div>
@@ -149,9 +146,9 @@ const handleInputChange = (
 
   if (!merchant) {
     return (
-      <div className="flex h-screen">
+      <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto h-full max-xl:flex-col">
         <DashboardSidebar />
-        <div className="flex-1 p-10 flex items-center justify-center">
+        <div className="flex-1 p-10 flex items-center justify-center text-slate-400">
           Merchant not found
         </div>
       </div>
@@ -159,95 +156,95 @@ const handleInputChange = (
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="bg-slate-950 min-h-screen text-slate-100 flex justify-start max-w-screen-2xl mx-auto h-full max-xl:flex-col max-xl:h-fit max-xl:gap-y-4">
       <DashboardSidebar />
-      <div className="flex-1 p-10 overflow-y-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Merchant Details</h1>
-          <div className="flex gap-4">
+      <div className="w-full p-6 lg:p-8 space-y-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl lg:text-3xl font-bold text-slate-100 tracking-tight">Merchant Details</h1>
+          <div className="flex gap-3">
             <Link
               href="/admin/merchant"
-              className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl transition-all duration-200 text-sm border border-slate-700"
             >
               Back to Merchants
             </Link>
             <button
               onClick={handleDelete}
-              className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition"
+              className="px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 font-semibold rounded-xl transition-all duration-200 text-sm"
             >
               Delete Merchant
             </button>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Name</label>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Name</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
                 required
               />
             </div>
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Email</label>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
               />
             </div>
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Phone</label>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Phone</label>
               <input
                 type="text"
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
               />
             </div>
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Status</label>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Status</label>
               <select
                 name="status"
                 value={formData.status}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 transition-all duration-200"
               >
-                <option value="ACTIVE">Active</option>
-                <option value="INACTIVE">Inactive</option>
+                <option value="ACTIVE" className="bg-slate-900 text-slate-200">Active</option>
+                <option value="INACTIVE" className="bg-slate-900 text-slate-200">Inactive</option>
               </select>
             </div>
             <div className="md:col-span-2">
-              <label className="block text-gray-700 font-medium mb-2">Address</label>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Address</label>
               <input
                 type="text"
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-gray-700 font-medium mb-2">Description</label>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Description</label>
               <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300 h-32"
+                className="w-full bg-slate-800/60 border border-slate-700 text-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200 h-28"
               ></textarea>
             </div>
             <div className="md:col-span-2">
               <button 
                 type="submit"
-                className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
+                className="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-cyan-500/20 text-sm"
               >
                 Save Changes
               </button>
@@ -255,38 +252,40 @@ const handleInputChange = (
           </form>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold mb-4">Merchant Products</h2>
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
+          <h2 className="text-xl font-bold text-slate-100 mb-4">Merchant Products</h2>
           {merchant.products.length > 0 ? (
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="py-3 text-left">Title</th>
-                  <th className="py-3 text-left">Price</th>
-                  <th className="py-3 text-left">In Stock</th>
-                  <th className="py-3 text-left">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {merchant.products.map((product) => (
-                  <tr key={product.id} className="border-b hover:bg-gray-50">
-                    <td className="py-4">{product.title}</td>
-                    <td className="py-4">${product.price / 100}</td>
-                    <td className="py-4">{product.inStock}</td>
-                    <td className="py-4">
-                      <Link
-                        href={`/admin/products/${product.id}`}
-                        className="text-blue-500 hover:underline"
-                      >
-                        View
-                      </Link>
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm text-slate-300">
+                <thead className="bg-slate-800/80 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-800">
+                  <tr>
+                    <th className="p-3">Title</th>
+                    <th className="p-3">Price</th>
+                    <th className="p-3">In Stock</th>
+                    <th className="p-3 text-right">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-800/60">
+                  {merchant.products.map((product) => (
+                    <tr key={product.id} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="p-3 font-medium text-slate-200">{product.title}</td>
+                      <td className="p-3 text-emerald-400 font-semibold">${product.price / 100}</td>
+                      <td className="p-3 text-slate-300">{product.inStock}</td>
+                      <td className="p-3 text-right">
+                        <Link
+                          href={`/admin/products/${product.id}`}
+                          className="px-3 py-1.5 text-xs font-medium text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg border border-cyan-500/20 transition-all"
+                        >
+                          View
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
-            <p className="text-gray-500">No products for this merchant yet.</p>
+            <p className="text-slate-400 text-sm">No products for this merchant yet.</p>
           )}
         </div>
       </div>
