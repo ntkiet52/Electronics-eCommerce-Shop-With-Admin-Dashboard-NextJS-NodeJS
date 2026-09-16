@@ -1,6 +1,21 @@
 const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 
 const prisma = new PrismaClient();
+
+const demoUsers = [
+  {
+    email: "admin@demo.com",
+    plainPassword: "Admin@2026Demo",
+    role: "admin",
+  },
+  {
+    email: "user@demo.com",
+    plainPassword: "User@2026Demo",
+    role: "user",
+  },
+];
 
 const demoMerchant = [
   {
@@ -239,6 +254,25 @@ const demoCategories = [
 ];
 
 async function insertDemoData() {
+  for (const user of demoUsers) {
+    const hashedPassword = await bcrypt.hash(user.plainPassword, 10);
+    await prisma.user.upsert({
+      where: { email: user.email },
+      update: {
+        password: hashedPassword,
+        role: user.role,
+      },
+      create: {
+        id: crypto.randomUUID(),
+        email: user.email,
+        password: hashedPassword,
+        role: user.role,
+      },
+    });
+  }
+  console.log("Demo users inserted/updated successfully:");
+  console.log(" - Admin: admin@demo.com | Password: Admin@2026Demo");
+  console.log(" - User:  user@demo.com  | Password: User@2026Demo");
 
   for (const merchant of demoMerchant) {
     await prisma.merchant.upsert({

@@ -1,6 +1,21 @@
 const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 
 const prisma = new PrismaClient();
+
+const demoUsers = [
+  {
+    email: "admin@demo.com",
+    plainPassword: "Admin@2026Demo",
+    role: "admin",
+  },
+  {
+    email: "user@demo.com",
+    plainPassword: "User@2026Demo",
+    role: "user",
+  },
+];
 
 const demoProducts = [
   {
@@ -184,7 +199,6 @@ const demoProductImages = [
   },
 ];
 
-
 const demoCategories = [
   {
     name: "speakers",
@@ -228,23 +242,49 @@ const demoCategories = [
 ];
 
 async function insertDemoData() {
+  for (const user of demoUsers) {
+    const hashedPassword = await bcrypt.hash(user.plainPassword, 10);
+    await prisma.user.upsert({
+      where: { email: user.email },
+      update: {
+        password: hashedPassword,
+        role: user.role,
+      },
+      create: {
+        id: crypto.randomUUID(),
+        email: user.email,
+        password: hashedPassword,
+        role: user.role,
+      },
+    });
+  }
+  console.log("Demo users inserted/updated successfully:");
+  console.log(" - Admin: admin@demo.com | Password: Admin@2026Demo");
+  console.log(" - User:  user@demo.com  | Password: User@2026Demo");
+
   for (const product of demoProducts) {
-    await prisma.product.create({
-      data: product,
+    await prisma.product.upsert({
+      where: { id: product.id },
+      update: {},
+      create: product,
     });
   }
   console.log("Demo products inserted successfully!");
 
   for (const image of demoProductImages) {
-    await prisma.image.create({
-      data: image,
+    await prisma.image.upsert({
+      where: { imageID: image.imageID },
+      update: {},
+      create: image,
     });
   }
   console.log("Demo images inserted successfully!");
 
   for (const category of demoCategories) {
-    await prisma.category.create({
-      data: category,
+    await prisma.category.upsert({
+      where: { name: category.name },
+      update: {},
+      create: category,
     });
   }
   console.log("Demo categories inserted successfully!");
