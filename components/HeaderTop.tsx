@@ -35,7 +35,7 @@ const HeaderTop = () => {
           </li>
           <li className="flex items-center gap-x-2 font-medium hover:text-cyan-400 transition-colors">
             <FaRegEnvelope className="text-cyan-400 text-lg" />
-            <span>thanhkiet@email.com</span>
+            <span>thanhkiet52@email.com</span>
           </li>
         </ul>
         <ul className="flex items-center gap-x-6 h-full text-xs md:text-sm max-[370px]:text-xs max-[370px]:gap-x-2 font-medium">
@@ -44,13 +44,13 @@ const HeaderTop = () => {
               <li className="flex items-center">
                 <Link href="/login" className="flex items-center gap-x-2 hover:text-cyan-400 transition-colors">
                   <FaRegUser className="text-cyan-400" />
-                  <span>Login</span>
+                  <span>Đăng Nhập</span>
                 </Link>
               </li>
               <li className="flex items-center">
                 <Link href="/register" className="flex items-center gap-x-2 hover:text-cyan-400 transition-colors">
                   <FaRegUser className="text-cyan-400" />
-                  <span>Register</span>
+                  <span>Đăng ký</span>
                 </Link>
               </li>
             </>
