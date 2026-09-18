@@ -31,7 +31,7 @@ const HeaderTop = () => {
         <ul className="flex items-center h-full gap-x-6 text-xs md:text-sm max-[370px]:text-xs max-[370px]:gap-x-2">
           <li className="flex items-center gap-x-2 font-medium hover:text-cyan-400 transition-colors">
             <FaHeadphones className="text-cyan-400" />
-            <span>+381 61 123 321</span>
+            <span>0898693571</span>
           </li>
           <li className="flex items-center gap-x-2 font-medium hover:text-cyan-400 transition-colors">
             <FaRegEnvelope className="text-cyan-400 text-lg" />
