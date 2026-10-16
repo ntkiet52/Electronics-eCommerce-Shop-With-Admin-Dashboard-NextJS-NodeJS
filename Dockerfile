@@ -9,6 +9,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ARG DATABASE_URL
 ENV DATABASE_URL=$DATABASE_URL
+ARG NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
 RUN npx prisma generate
 RUN npm run build
 
