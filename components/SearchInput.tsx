@@ -32,7 +32,7 @@ const SearchInput = () => {
         type="text"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
-        placeholder="Nguyễn Thanh Kiệt"
+        placeholder="Tìm Kiếm Nguyễn Thanh Kiệt"
         className="w-full bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-400 px-4 py-2.5 rounded-l-xl outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 text-sm transition-all duration-200"
       />
       <button
