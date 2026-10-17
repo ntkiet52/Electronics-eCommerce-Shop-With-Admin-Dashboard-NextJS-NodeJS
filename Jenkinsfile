@@ -97,7 +97,7 @@ pipeline {
           '''
         }
         try {
-          mail to: 'EMAIL_CUA_BAN',
+            mail to: 'alert@kietlucidtech.opik.net',
                subject: "Build #${env.BUILD_NUMBER} FAIL: ${env.JOB_NAME}",
                body: "Build loi, xem: ${env.BUILD_URL}"
         } catch (e) { echo 'Chua cau hinh mail (lam o ngay 4)' }
